@@ -11,1177 +11,1026 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --violet: #5B21B6; --indigo: #4F46E5; --indigo-light: #6366F1;
-      --indigo-50: #EEF2FF; --indigo-100: #E0E7FF; --violet-dark: #3B0764;
-      --white: #FFFFFF; --grey-50: #F9FAFB; --grey-100: #F3F4F6;
-      --grey-200: #E5E7EB; --grey-400: #9CA3AF; --grey-600: #4B5563;
-      --grey-700: #374151; --grey-900: #111827;
-      --grey-300: #D1D5DB; --grey-500: #6B7280;
-      --green: #059669; --green-light: #D1FAE5;
+      --indigo-50: #EEF2FF; --indigo-100: #E0E7FF; --indigo-200: #C7D2FE;
+      --violet-dark: #3B0764; --violet-50: #F5F3FF;
+      --white: #FFFFFF;
+      --grey-50: #F9FAFB; --grey-100: #F3F4F6; --grey-200: #E5E7EB;
+      --grey-300: #D1D5DB; --grey-400: #9CA3AF; --grey-500: #6B7280;
+      --grey-600: #4B5563; --grey-700: #374151; --grey-900: #111827;
+      --green: #059669; --green-light: #D1FAE5; --green-50:#ECFDF5;
+      --amber: #D97706; --amber-light: #FEF3C7;
+      --pink: #DB2777; --pink-light: #FCE7F3;
+      --blue: #2563EB; --blue-light: #DBEAFE;
       --radius: 12px; --radius-lg: 20px;
-      --shadow: 0 4px 24px rgba(79,70,229,0.10);
-      --shadow-lg: 0 8px 40px rgba(79,70,229,0.18);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.06);
+      --shadow: 0 4px 20px rgba(79,70,229,.08);
+      --shadow-lg: 0 12px 40px rgba(79,70,229,.15);
+      --shadow-xl: 0 20px 60px rgba(79,70,229,.22);
     }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--grey-900); line-height: 1.6; }
+    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--grey-900); line-height: 1.6; font-size:16px; }
 
-    /* NAV */
-    nav {
-      position: sticky; top: 0; z-index: 200;
-      background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--grey-200);
-      padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 64px;
-    }
-    .nav-logo { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.5px; background: linear-gradient(135deg,var(--violet),var(--indigo-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .nav-links { display: flex; gap: 24px; list-style: none; }
-    .nav-links a { text-decoration: none; color: var(--grey-600); font-size: 0.875rem; font-weight: 500; transition: color .2s; }
+    /* ── NAV ── */
+    nav { position: sticky; top: 0; z-index: 300; background: rgba(255,255,255,.95); backdrop-filter: blur(14px); border-bottom: 1px solid var(--grey-200); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .nav-logo { font-size: 1.35rem; font-weight: 800; letter-spacing: -.5px; background: linear-gradient(135deg,var(--violet),var(--indigo-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--grey-600); font-size: .9rem; font-weight: 500; transition: color .2s; }
     .nav-links a:hover { color: var(--indigo); }
-    .nav-cta { background: linear-gradient(135deg,var(--violet),var(--indigo)); color: var(--white); border: none; border-radius: 8px; padding: 12px 22px; font-size: 0.875rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: opacity .2s; min-height: 44px; display: inline-flex; align-items: center; }
-    .nav-cta:hover { opacity: .88; }
+    .nav-cta { background: var(--grey-900); color: var(--white); border: none; border-radius: 10px; padding: 12px 22px; font-size: .875rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: all .2s; min-height: 44px; display: inline-flex; align-items: center; }
+    .nav-cta:hover { background: var(--indigo); transform: translateY(-1px); }
 
-    /* HERO */
-    .hero { background: linear-gradient(150deg,var(--violet-dark) 0%,var(--violet) 40%,var(--indigo) 100%); color: var(--white); padding: 100px 5% 90px; text-align: center; position: relative; overflow: hidden; }
-    .hero::before { content:''; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
-    .hero-badge { display:inline-block; background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.3); border-radius:999px; padding:6px 18px; font-size:.8rem; font-weight:600; letter-spacing:.5px; text-transform:uppercase; margin-bottom:24px; }
-    .hero h1 { font-size:clamp(2.2rem,5vw,3.8rem); font-weight:900; letter-spacing:-1.5px; line-height:1.1; margin-bottom:20px; }
-    .hero p { font-size:clamp(1rem,2vw,1.2rem); opacity:.85; max-width:560px; margin:0 auto 36px; }
-    .hero-actions { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
-    .btn-primary { background:var(--white); color:var(--violet); border:none; border-radius:10px; padding:14px 32px; font-size:1rem; font-weight:700; cursor:pointer; text-decoration:none; transition:transform .2s,box-shadow .2s; box-shadow:0 4px 20px rgba(0,0,0,.2); min-height:44px; display:inline-flex; align-items:center; }
-    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(0,0,0,.25); }
-    .btn-outline { background:transparent; color:var(--white); border:2px solid rgba(255,255,255,.5); border-radius:10px; padding:14px 32px; font-size:1rem; font-weight:600; cursor:pointer; text-decoration:none; transition:border-color .2s,background .2s; min-height:44px; display:inline-flex; align-items:center; }
-    .btn-outline:hover { border-color:var(--white); background:rgba(255,255,255,.08); }
-    .hero-stats { display:flex; gap:48px; justify-content:center; flex-wrap:wrap; margin-top:64px; padding-top:48px; border-top:1px solid rgba(255,255,255,.15); }
-    .hero-stat { text-align:center; }
-    .hero-stat strong { display:block; font-size:2rem; font-weight:800; }
-    .hero-stat span { font-size:.85rem; opacity:.7; }
+    /* ── HERO ── */
+    .hero { padding: 80px 24px 60px; text-align: center; background: linear-gradient(180deg, var(--white) 0%, var(--violet-50) 100%); position: relative; overflow: hidden; }
+    .hero-inner { max-width: 820px; margin: 0 auto; position: relative; z-index: 2; }
+    .hero-pill { display: inline-flex; align-items: center; gap: 8px; background: var(--white); border: 1px solid var(--grey-200); border-radius: 999px; padding: 6px 14px; font-size: .8rem; font-weight: 600; color: var(--grey-700); margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+    .hero-pill-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px var(--green-50); }
+    .hero h1 { font-size: clamp(2.2rem,5.5vw,4rem); font-weight: 900; letter-spacing: -2px; line-height: 1.05; margin-bottom: 20px; color: var(--grey-900); }
+    .hero h1 .gradient { background: linear-gradient(135deg,var(--violet),var(--indigo)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p.lead { font-size: clamp(1.05rem,1.8vw,1.25rem); color: var(--grey-600); max-width: 620px; margin: 0 auto 36px; }
+    .hero-cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: none; border-radius: 10px; padding: 14px 26px; font-size: 1rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: all .2s; min-height: 48px; font-family: inherit; }
+    .btn-solid { background: var(--grey-900); color: var(--white); }
+    .btn-solid:hover { background: var(--indigo); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .btn-ghost { background: var(--white); color: var(--grey-900); border: 1px solid var(--grey-200); }
+    .btn-ghost:hover { border-color: var(--indigo); color: var(--indigo); }
+    .btn-sm { padding: 10px 18px; font-size: .875rem; min-height: 40px; }
 
-    /* SECTIONS */
-    section { padding: 80px 5%; }
-    .section-wrap { max-width: 1200px; margin: 0 auto; }
-    .section-label { display:inline-block; background:var(--indigo-100); color:var(--indigo); border-radius:999px; padding:5px 16px; font-size:.75rem; font-weight:700; letter-spacing:.6px; text-transform:uppercase; margin-bottom:14px; }
-    h2 { font-size:clamp(1.6rem,3vw,2.4rem); font-weight:800; letter-spacing:-.5px; margin-bottom:12px; }
-    .section-sub { color:var(--grey-600); font-size:1.05rem; max-width:600px; }
+    .trust { display: flex; gap: 24px; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 20px; font-size: .8rem; color: var(--grey-500); }
+    .trust-item { display: flex; align-items: center; gap: 6px; }
+    .trust-item::before { content: '✓'; color: var(--green); font-weight: 700; }
 
-    /* WHY */
-    .why { background: var(--grey-50); }
-    .why-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:24px; margin-top:48px; }
-    .why-card { background:var(--white); border-radius:var(--radius); padding:28px 24px; border:1px solid var(--grey-200); transition:box-shadow .2s,transform .2s; }
-    .why-card:hover { box-shadow:var(--shadow); transform:translateY(-3px); }
-    .why-icon { width:48px; height:48px; border-radius:12px; background:var(--indigo-100); display:flex; align-items:center; justify-content:center; font-size:1.4rem; margin-bottom:16px; }
-    .why-card h3 { font-size:1rem; font-weight:700; margin-bottom:8px; }
-    .why-card p { font-size:.875rem; color:var(--grey-600); line-height:1.55; }
+    /* ── GOAL WIZARD ── */
+    .wizard { padding: 64px 24px; background: var(--white); }
+    .wizard-inner { max-width: 1100px; margin: 0 auto; }
+    .section-eyebrow { text-align: center; color: var(--indigo); font-size: .8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+    .section-title { text-align: center; font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 800; letter-spacing: -.5px; margin-bottom: 10px; }
+    .section-sub { text-align: center; color: var(--grey-600); max-width: 580px; margin: 0 auto 40px; font-size: 1rem; }
+    .goal-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 16px; }
+    .goal-card { background: var(--white); border: 2px solid var(--grey-200); border-radius: var(--radius-lg); padding: 28px 22px; text-align: left; cursor: pointer; transition: all .2s; position: relative; font-family: inherit; }
+    .goal-card:hover { border-color: var(--indigo); transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .goal-card.active { border-color: var(--indigo); background: var(--indigo-50); }
+    .goal-card.active::after { content: '✓'; position: absolute; top: 16px; right: 16px; width: 24px; height: 24px; border-radius: 50%; background: var(--indigo); color: var(--white); font-size: .8rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    .goal-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 14px; }
+    .goal-1 .goal-icon { background: var(--blue-light); }
+    .goal-2 .goal-icon { background: var(--green-light); }
+    .goal-3 .goal-icon { background: var(--amber-light); }
+    .goal-4 .goal-icon { background: var(--pink-light); }
+    .goal-title { font-size: 1rem; font-weight: 700; margin-bottom: 6px; color: var(--grey-900); }
+    .goal-desc { font-size: .825rem; color: var(--grey-600); line-height: 1.5; }
+    .goal-count { font-size: .7rem; font-weight: 700; color: var(--indigo); margin-top: 10px; letter-spacing: .3px; }
 
-    /* TOGGLE */
-    .toggle-wrap { display:flex; align-items:center; justify-content:center; gap:14px; margin:40px 0 48px; }
-    .toggle-label { font-size:.95rem; font-weight:600; color:var(--grey-400); transition:color .2s; }
-    .toggle-label.active { color:var(--indigo); }
-    .savings-badge { background:var(--green-light); color:var(--green); border-radius:999px; padding:3px 10px; font-size:.75rem; font-weight:700; }
-    .toggle-switch { position:relative; width:52px; height:28px; background:var(--indigo); border-radius:999px; cursor:pointer; border:none; transition:background .2s; }
-    .toggle-switch::after { content:''; position:absolute; top:3px; left:3px; width:22px; height:22px; background:var(--white); border-radius:50%; transition:transform .25s; }
-    .toggle-switch.monthly::after { transform:translateX(0); }
-    .toggle-switch.yearly::after { transform:translateX(24px); }
+    /* ── BUILDER LAYOUT ── */
+    .builder { background: var(--grey-50); padding: 64px 24px 120px; }
+    .builder-inner { max-width: 1400px; margin: 0 auto; }
+    .builder-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+    .builder-title { font-size: 1.5rem; font-weight: 800; letter-spacing: -.3px; }
+    .builder-title .count { color: var(--indigo); }
+    .search-wrap { position: relative; flex: 1; max-width: 360px; }
+    .search-input { width: 100%; padding: 12px 14px 12px 42px; border: 1px solid var(--grey-200); border-radius: 10px; font-size: .9rem; background: var(--white); font-family: inherit; transition: border-color .2s, box-shadow .2s; }
+    .search-input:focus { outline: none; border-color: var(--indigo); box-shadow: 0 0 0 3px var(--indigo-100); }
+    .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 1rem; color: var(--grey-400); }
 
-    /* PACKAGES */
-    .packages-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; }
-    .pkg-card { border:2px solid var(--grey-200); border-radius:var(--radius-lg); padding:32px 28px; position:relative; transition:box-shadow .2s,transform .2s; background:var(--white); }
-    .pkg-card:hover { box-shadow:var(--shadow-lg); transform:translateY(-4px); }
-    .pkg-card.featured { border-color:var(--indigo); background:linear-gradient(160deg,#f5f3ff 0%,#eef2ff 100%); }
-    .pkg-popular { position:absolute; top:-14px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,var(--violet),var(--indigo)); color:var(--white); border-radius:999px; padding:4px 18px; font-size:.72rem; font-weight:700; letter-spacing:.5px; text-transform:uppercase; white-space:nowrap; }
-    .pkg-name { font-size:.8rem; font-weight:700; color:var(--indigo); text-transform:uppercase; letter-spacing:.6px; margin-bottom:8px; }
-    .pkg-price { font-size:2.6rem; font-weight:900; letter-spacing:-1px; line-height:1; }
-    .pkg-price span { font-size:1rem; font-weight:500; color:var(--grey-600); }
-    .pkg-price-yr { font-size:.85rem; color:var(--grey-400); margin-top:4px; margin-bottom:16px; }
-    .pkg-desc { font-size:.875rem; color:var(--grey-600); margin-bottom:16px; }
-    .pkg-features { list-style:none; margin-bottom:28px; }
-    .pkg-features li { font-size:.875rem; color:var(--grey-700); padding:6px 0; border-bottom:1px solid var(--grey-100); display:flex; gap:10px; align-items:flex-start; }
-    .pkg-features li:last-child { border-bottom:none; }
-    .pkg-features li::before { content:'✓'; color:var(--green); font-weight:700; flex-shrink:0; margin-top:1px; }
-    .pkg-btn { display:block; text-align:center; text-decoration:none; background:linear-gradient(135deg,var(--violet),var(--indigo)); color:var(--white); border-radius:10px; padding:13px; font-size:.95rem; font-weight:700; transition:opacity .2s,transform .2s; border:none; cursor:pointer; width:100%; min-height:44px; }
-    .pkg-btn:hover { opacity:.88; transform:translateY(-1px); }
-    .pkg-btn.outline { background:transparent; color:var(--indigo); border:2px solid var(--indigo); }
-    .pkg-btn.outline:hover { background:var(--indigo-50); }
+    .tab-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+    .tab-btn { background: var(--white); border: 1px solid var(--grey-200); color: var(--grey-700); border-radius: 10px; padding: 10px 16px; font-size: .85rem; font-weight: 600; cursor: pointer; transition: all .2s; font-family: inherit; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
+    .tab-btn:hover { border-color: var(--indigo); color: var(--indigo); }
+    .tab-btn.active { background: var(--grey-900); color: var(--white); border-color: var(--grey-900); }
+    .tab-btn .badge { background: var(--indigo-100); color: var(--indigo); font-size: .7rem; padding: 1px 7px; border-radius: 999px; font-weight: 700; }
+    .tab-btn.active .badge { background: rgba(255,255,255,.2); color: var(--white); }
 
-    /* ── CHECKBOX CALCULATOR ── */
-    .calculator { background: var(--grey-50); }
-    .calc-header { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:32px; }
-    .calc-toggle-wrap { display:flex; align-items:center; gap:12px; }
-    .calc-toggle-label { font-size:.875rem; font-weight:600; color:var(--grey-400); transition:color .2s; }
-    .calc-toggle-label.active { color:var(--indigo); }
+    .builder-body { display: grid; grid-template-columns: 1fr 360px; gap: 32px; align-items: start; }
 
-    .calc-table { width:100%; border-collapse:separate; border-spacing:0; background:var(--white); border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow); }
-    .calc-table thead { background:linear-gradient(135deg,var(--violet),var(--indigo)); color:var(--white); }
-    .calc-table thead th { padding:14px 18px; text-align:left; font-size:.82rem; font-weight:700; letter-spacing:.3px; }
-    .calc-table thead th.th-price { text-align:right; }
-    .calc-table thead th.th-check { width:48px; text-align:center; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 16px; }
+    .service-card { background: var(--white); border: 1.5px solid var(--grey-200); border-radius: var(--radius); padding: 20px; transition: all .2s; position: relative; cursor: pointer; }
+    .service-card:hover { border-color: var(--indigo-200); box-shadow: var(--shadow); transform: translateY(-2px); }
+    .service-card.selected { border-color: var(--indigo); background: var(--indigo-50); }
+    .service-card.selected::after { content: ''; position: absolute; top: 14px; right: 14px; width: 22px; height: 22px; border-radius: 50%; background: var(--indigo); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: center; }
+    .service-card.hidden { display: none; }
+    .svc-cat-tag { display: inline-block; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; padding: 3px 8px; border-radius: 5px; margin-bottom: 10px; }
+    .svc-name { font-size: .98rem; font-weight: 700; margin-bottom: 6px; padding-right: 30px; color: var(--grey-900); line-height: 1.3; }
+    .svc-desc { font-size: .8rem; color: var(--grey-600); line-height: 1.5; margin-bottom: 14px; }
+    .svc-price-row { display: flex; align-items: baseline; justify-content: space-between; }
+    .svc-price { font-size: 1.15rem; font-weight: 800; color: var(--grey-900); letter-spacing: -.3px; }
+    .svc-price span { font-size: .78rem; font-weight: 500; color: var(--grey-500); }
+    .svc-add { background: var(--grey-900); color: var(--white); border: none; border-radius: 8px; padding: 7px 14px; font-size: .78rem; font-weight: 600; cursor: pointer; transition: background .2s; font-family: inherit; }
+    .service-card.selected .svc-add { background: var(--indigo); }
+    .service-card.selected .svc-add::before { content: '✓ '; }
+    .service-card.selected .svc-add { background: var(--green); }
 
-    .cat-header td { background:linear-gradient(90deg,#f5f3ff,#eef2ff); color:var(--indigo); font-size:.75rem; font-weight:800; text-transform:uppercase; letter-spacing:.6px; padding:10px 18px; border-top:2px solid var(--indigo-100); }
+    /* Category tag colors */
+    .cat-seo { background:#dbeafe; color:#1e40af; }
+    .cat-social { background:#fce7f3; color:#9f1239; }
+    .cat-ads { background:#fef3c7; color:#92400e; }
+    .cat-email { background:#dcfce7; color:#166534; }
+    .cat-content { background:#ede9fe; color:#5b21b6; }
+    .cat-automation { background:#cffafe; color:#155e75; }
+    .cat-ai { background:#fae8ff; color:#6b21a8; }
+    .cat-conversion { background:#ffedd5; color:#9a3412; }
+    .cat-influencer { background:#fef9c3; color:#854d0e; }
+    .cat-messaging { background:#dcfce7; color:#15803d; }
+    .cat-sales { background:#fee2e2; color:#991b1b; }
+    .cat-staff { background:#e0f2fe; color:#075985; }
+    .cat-odoo { background:#f5f3ff; color:#5b21b6; }
 
-    .svc-row { border-bottom:1px solid var(--grey-100); transition:background .15s; cursor:pointer; }
-    .svc-row:hover { background:var(--indigo-50); }
-    .svc-row.checked { background:#f0fdf4; }
-    .svc-row.checked td { opacity:1; }
-    .svc-row:not(.checked) .svc-name { color:var(--grey-500); }
+    /* ── CART PANEL ── */
+    .cart { background: var(--white); border: 1px solid var(--grey-200); border-radius: var(--radius-lg); padding: 24px; position: sticky; top: 88px; box-shadow: var(--shadow); }
+    .cart-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .cart-title { font-size: 1.05rem; font-weight: 800; }
+    .cart-count { background: var(--indigo-100); color: var(--indigo); font-size: .75rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
 
-    .svc-row td { padding:13px 18px; vertical-align:middle; }
-    .td-check { text-align:center; width:48px; }
-    .svc-checkbox { width:18px; height:18px; cursor:pointer; accent-color:var(--indigo); }
-    .svc-name { font-size:.875rem; font-weight:600; color:var(--grey-900); }
-    .svc-desc { font-size:.78rem; color:var(--grey-400); margin-top:2px; font-weight:400; }
-    .svc-row:not(.checked) .svc-name { color:var(--grey-500); }
-    .svc-row:not(.checked) .svc-desc { color:var(--grey-300); }
-    .td-price { text-align:right; font-size:.9rem; font-weight:700; color:var(--indigo); white-space:nowrap; }
-    .svc-row:not(.checked) .td-price { color:var(--grey-300); }
-    .service-tag { display:inline-block; font-size:.7rem; font-weight:600; background:var(--indigo-100); color:var(--indigo); border-radius:4px; padding:1px 7px; margin-left:6px; vertical-align:middle; }
+    .cart-toggle { display:flex; align-items:center; justify-content:space-between; background: var(--grey-50); border-radius: 10px; padding: 4px; margin-bottom: 18px; }
+    .cart-toggle-btn { flex: 1; background: transparent; border: none; padding: 8px; font-size: .8rem; font-weight: 600; color: var(--grey-600); cursor: pointer; border-radius: 8px; transition: all .2s; font-family: inherit; }
+    .cart-toggle-btn.active { background: var(--white); color: var(--grey-900); box-shadow: var(--shadow-sm); }
+    .cart-toggle-btn .save-chip { font-size:.65rem; background:var(--green-light); color:var(--green); padding:1px 6px; border-radius:4px; margin-left:4px; font-weight:700; }
 
-    /* Sticky summary bar */
-    .summary-bar {
-      position:sticky; bottom:0; z-index:150;
-      background:linear-gradient(135deg,var(--violet-dark),var(--indigo));
-      color:var(--white); padding:18px 5%;
-      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;
-      box-shadow:0 -4px 24px rgba(79,70,229,.25);
-      transition:transform .3s;
+    .cart-items { max-height: 280px; overflow-y: auto; margin: 0 -4px; padding: 0 4px; }
+    .cart-empty { text-align: center; padding: 28px 10px; color: var(--grey-500); font-size: .85rem; }
+    .cart-empty-icon { font-size: 2rem; margin-bottom: 10px; opacity: .3; }
+    .cart-item { display: flex; align-items: flex-start; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--grey-100); }
+    .cart-item:last-child { border-bottom: none; }
+    .cart-item-info { flex: 1; min-width: 0; }
+    .cart-item-name { font-size: .82rem; font-weight: 600; color: var(--grey-900); line-height: 1.35; margin-bottom: 3px; }
+    .cart-item-price { font-size: .78rem; font-weight: 700; color: var(--indigo); }
+    .cart-remove { background: transparent; border: none; color: var(--grey-400); font-size: 1.1rem; cursor: pointer; padding: 0 4px; line-height: 1; transition: color .2s; font-family: inherit; }
+    .cart-remove:hover { color: var(--pink); }
+
+    .cart-total-row { display: flex; justify-content: space-between; align-items: baseline; padding-top: 16px; margin-top: 12px; border-top: 2px solid var(--grey-100); }
+    .cart-total-label { font-size: .82rem; color: var(--grey-600); font-weight: 500; }
+    .cart-total-value { font-size: 1.6rem; font-weight: 900; letter-spacing: -.5px; color: var(--grey-900); }
+    .cart-total-value span { font-size: .85rem; font-weight: 500; color: var(--grey-500); }
+    .cart-savings { font-size: .75rem; color: var(--green); font-weight: 700; margin-top: 4px; text-align: right; }
+    .cart-rec { background: linear-gradient(135deg,var(--violet-50),var(--indigo-50)); border-radius: 10px; padding: 12px 14px; margin: 14px 0; font-size: .78rem; color: var(--grey-700); line-height: 1.5; display: none; }
+    .cart-rec.visible { display: block; }
+    .cart-rec strong { color: var(--indigo); display:block; margin-bottom:4px; font-size:.72rem; letter-spacing:.5px; text-transform:uppercase;}
+    .cart-checkout { width: 100%; background: linear-gradient(135deg,var(--violet),var(--indigo)); color: var(--white); border: none; border-radius: 10px; padding: 14px; font-size: .95rem; font-weight: 700; cursor: pointer; margin-top: 16px; transition: transform .2s, box-shadow .2s; font-family: inherit; min-height: 48px; }
+    .cart-checkout:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .cart-clear { background: transparent; border: 1px solid var(--grey-200); color: var(--grey-600); border-radius: 8px; padding: 8px; font-size: .78rem; font-weight: 500; cursor: pointer; width: 100%; margin-top: 8px; transition: all .2s; font-family: inherit; }
+    .cart-clear:hover { border-color: var(--pink); color: var(--pink); }
+
+    /* Mobile cart drawer trigger */
+    .cart-mobile-bar { display: none; }
+
+    /* ── PACKAGES ── */
+    .packages { padding: 80px 24px; background: var(--white); }
+    .pkg-inner { max-width: 1200px; margin: 0 auto; }
+    .pkg-toggle-wrap { display: inline-flex; align-items: center; gap: 10px; background: var(--grey-100); border-radius: 999px; padding: 4px; margin: 0 auto 40px; }
+    .pkg-toggle-btn { background: transparent; border: none; padding: 8px 18px; border-radius: 999px; font-size: .85rem; font-weight: 600; color: var(--grey-600); cursor: pointer; transition: all .2s; font-family: inherit; min-height: 40px; }
+    .pkg-toggle-btn.active { background: var(--white); color: var(--grey-900); box-shadow: var(--shadow-sm); }
+    .pkg-toggle-wrap-center { text-align: center; }
+
+    .pkg-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 20px; }
+    .pkg-card { background: var(--white); border: 2px solid var(--grey-200); border-radius: var(--radius-lg); padding: 32px 28px; position: relative; transition: all .25s; }
+    .pkg-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-xl); border-color: var(--indigo-200); }
+    .pkg-card.featured { border-color: var(--indigo); background: linear-gradient(180deg,var(--white) 0%, var(--indigo-50) 100%); }
+    .pkg-popular { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg,var(--violet),var(--indigo)); color: var(--white); border-radius: 999px; padding: 5px 18px; font-size: .72rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; white-space: nowrap; box-shadow: var(--shadow); }
+    .pkg-name { font-size: .8rem; font-weight: 700; color: var(--indigo); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+    .pkg-price { font-size: 2.6rem; font-weight: 900; letter-spacing: -1px; line-height: 1; color: var(--grey-900); }
+    .pkg-price span { font-size: 1rem; font-weight: 500; color: var(--grey-500); }
+    .pkg-price-sub { font-size: .82rem; color: var(--grey-500); margin-top: 6px; margin-bottom: 18px; }
+    .pkg-desc { font-size: .88rem; color: var(--grey-600); margin-bottom: 20px; line-height:1.55; }
+    .pkg-features { list-style: none; margin-bottom: 28px; }
+    .pkg-features li { font-size: .85rem; color: var(--grey-700); padding: 7px 0; display: flex; gap: 10px; align-items: flex-start; }
+    .pkg-features li::before { content: '✓'; color: var(--green); font-weight: 800; flex-shrink: 0; }
+    .pkg-btn { display: flex; align-items: center; justify-content: center; text-decoration: none; width: 100%; border-radius: 10px; padding: 13px; font-size: .9rem; font-weight: 700; transition: all .2s; border: 2px solid var(--grey-900); background: var(--grey-900); color: var(--white); cursor: pointer; min-height: 46px; font-family: inherit; }
+    .pkg-btn:hover { background: var(--indigo); border-color: var(--indigo); transform: translateY(-1px); }
+    .pkg-btn.outline { background: var(--white); color: var(--grey-900); }
+    .pkg-card.featured .pkg-btn { background: linear-gradient(135deg,var(--violet),var(--indigo)); border: none; padding: 15px; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials { padding: 80px 24px; background: var(--grey-50); }
+    .testimonials-inner { max-width: 1200px; margin: 0 auto; }
+    .logos-strip { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; align-items: center; margin-bottom: 56px; }
+    .logo-item { font-size: 1.15rem; font-weight: 700; color: var(--grey-400); letter-spacing: -.3px; opacity:.7; transition:opacity .2s; }
+    .logo-item:hover { opacity: 1; color: var(--grey-600); }
+
+    .testi-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 20px; }
+    .testi-card { background: var(--white); border: 1px solid var(--grey-200); border-radius: var(--radius-lg); padding: 28px; transition: all .2s; }
+    .testi-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .testi-stars { color: #F59E0B; margin-bottom: 14px; font-size: 1.05rem; letter-spacing: 2px; }
+    .testi-quote { font-size: .95rem; color: var(--grey-700); line-height: 1.65; margin-bottom: 20px; font-weight: 500; }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .testi-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg,var(--violet),var(--indigo)); color: var(--white); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .9rem; }
+    .testi-info strong { display: block; font-size: .88rem; color: var(--grey-900); }
+    .testi-info span { font-size: .78rem; color: var(--grey-500); }
+
+    /* ── FAQ ── */
+    .faq { padding: 80px 24px; background: var(--white); }
+    .faq-inner { max-width: 760px; margin: 0 auto; }
+    .faq-item { border-bottom: 1px solid var(--grey-200); padding: 20px 0; }
+    .faq-q { display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 600; font-size: 1rem; color: var(--grey-900); gap: 16px; transition: color .2s; }
+    .faq-q:hover { color: var(--indigo); }
+    .faq-icon { font-size: 1.3rem; color: var(--indigo); flex-shrink: 0; transition: transform .25s; line-height:1; }
+    .faq-a { font-size: .9rem; color: var(--grey-600); line-height: 1.7; max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .25s; }
+    .faq-item.open .faq-a { max-height: 400px; padding-top: 14px; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    /* ── CTA ── */
+    .cta-banner { background: linear-gradient(135deg,var(--violet-dark) 0%, var(--violet) 50%, var(--indigo) 100%); color: var(--white); text-align: center; padding: 80px 24px; position:relative; overflow:hidden; }
+    .cta-inner { max-width: 640px; margin: 0 auto; position:relative; z-index:2; }
+    .cta-banner h2 { font-size: clamp(1.8rem,3.5vw,2.6rem); margin-bottom: 14px; font-weight:800; letter-spacing:-.5px; }
+    .cta-banner p { opacity: .85; margin-bottom: 32px; font-size: 1.05rem; }
+    .cta-banner .btn-solid { background: var(--white); color: var(--violet); }
+    .cta-banner .btn-solid:hover { background: var(--grey-100); color: var(--violet); }
+    .cta-banner .btn-ghost { background: transparent; color: var(--white); border-color: rgba(255,255,255,.3); }
+    .cta-banner .btn-ghost:hover { border-color: var(--white); background: rgba(255,255,255,.1); color: var(--white); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--grey-900); color: var(--grey-400); padding: 48px 24px 32px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; margin-bottom: 32px; }
+    .footer-logo { font-size: 1.25rem; font-weight: 800; color: var(--white); margin-bottom: 10px; }
+    .footer-tag { font-size:.88rem; line-height:1.5; max-width:280px; }
+    .footer-col h4 { font-size:.78rem; font-weight:700; color:var(--white); text-transform:uppercase; letter-spacing:.6px; margin-bottom:14px; }
+    .footer-col ul { list-style:none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: var(--grey-400); text-decoration: none; font-size:.88rem; transition: color .2s; }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom { border-top: 1px solid var(--grey-700); padding-top: 24px; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size:.8rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .builder-body { grid-template-columns: 1fr; }
+      .cart { position: fixed; bottom: 0; left: 0; right: 0; top: auto; border-radius: 20px 20px 0 0; max-height: 80vh; overflow-y: auto; z-index: 250; transform: translateY(calc(100% - 68px)); transition: transform .3s; padding: 20px 20px 28px; }
+      .cart.open { transform: translateY(0); }
+      .cart-mobile-bar { display: flex; cursor: pointer; align-items: center; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid var(--grey-100); margin-bottom: 12px; }
+      .cart-mobile-bar::after { content: '▲'; color: var(--grey-400); font-size: .7rem; transition: transform .2s; }
+      .cart.open .cart-mobile-bar::after { transform: rotate(180deg); }
+      .builder { padding-bottom: 160px; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
     }
-    .summary-bar.hidden { transform:translateY(120%); }
-    .summary-left { display:flex; align-items:center; gap:20px; }
-    .summary-count { font-size:.85rem; font-weight:600; opacity:.8; }
-    .summary-prices { display:flex; gap:32px; }
-    .summary-price-item { text-align:center; }
-    .summary-price-label { font-size:.7rem; font-weight:600; opacity:.7; text-transform:uppercase; letter-spacing:.5px; display:block; }
-    .summary-price-value { font-size:1.5rem; font-weight:900; letter-spacing:-.5px; }
-    .summary-savings { background:rgba(255,255,255,.15); border-radius:8px; padding:4px 12px; font-size:.8rem; font-weight:700; }
-    .summary-actions { display:flex; gap:10px; }
-    .summary-btn { background:var(--white); color:var(--violet); border:none; border-radius:8px; padding:10px 20px; font-size:.875rem; font-weight:700; cursor:pointer; transition:transform .2s; min-height:44px; }
-    .summary-btn:hover { transform:translateY(-1px); }
-    .summary-btn-clear { background:rgba(255,255,255,.15); color:var(--white); border:1px solid rgba(255,255,255,.3); border-radius:8px; padding:10px 16px; font-size:.875rem; font-weight:600; cursor:pointer; min-height:44px; }
 
-    /* ── SERVICE DETAILS ── */
-    .svc-details { background:var(--white); }
-    .detail-cats { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:40px; }
-    .detail-cat-btn { background:var(--grey-100); color:var(--grey-700); border:none; border-radius:999px; padding:8px 18px; font-size:.8rem; font-weight:600; cursor:pointer; transition:background .2s,color .2s; min-height:44px; display:inline-flex; align-items:center; }
-    .detail-cat-btn.active, .detail-cat-btn:hover { background:var(--indigo); color:var(--white); }
-
-    .detail-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:24px; }
-    .detail-card { border:1px solid var(--grey-200); border-radius:var(--radius-lg); padding:28px; background:var(--white); transition:box-shadow .2s,transform .2s; display:none; }
-    .detail-card.visible { display:block; }
-    .detail-card:hover { box-shadow:var(--shadow); transform:translateY(-2px); }
-    .detail-card-header { display:flex; align-items:flex-start; gap:14px; margin-bottom:16px; }
-    .detail-icon { width:44px; height:44px; border-radius:10px; background:var(--indigo-100); display:flex; align-items:center; justify-content:center; font-size:1.3rem; flex-shrink:0; }
-    .detail-card-title { font-size:1rem; font-weight:700; margin-bottom:4px; }
-    .detail-card-price { font-size:.82rem; font-weight:700; color:var(--indigo); }
-    .detail-card p { font-size:.875rem; color:var(--grey-600); line-height:1.6; margin-bottom:14px; }
-    .detail-includes { list-style:none; margin-bottom:14px; }
-    .detail-includes li { font-size:.82rem; color:var(--grey-700); padding:4px 0; display:flex; gap:8px; }
-    .detail-includes li::before { content:'✓'; color:var(--green); font-weight:700; flex-shrink:0; }
-    .detail-example { background:var(--indigo-50); border-left:3px solid var(--indigo); border-radius:0 8px 8px 0; padding:10px 14px; font-size:.8rem; color:var(--grey-700); line-height:1.55; }
-    .detail-example strong { color:var(--indigo); }
-
-    /* FAQ */
-    .faq { background:var(--grey-50); }
-    .faq-list { max-width:760px; margin:40px auto 0; }
-    .faq-item { border-bottom:1px solid var(--grey-200); padding:20px 0; }
-    .faq-q { display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-weight:600; font-size:1rem; color:var(--grey-900); gap:16px; }
-    .faq-icon { font-size:1.2rem; color:var(--indigo); flex-shrink:0; transition:transform .25s; }
-    .faq-a { font-size:.9rem; color:var(--grey-600); line-height:1.7; max-height:0; overflow:hidden; transition:max-height .35s ease,padding .25s; }
-    .faq-item.open .faq-a { max-height:300px; padding-top:12px; }
-    .faq-item.open .faq-icon { transform:rotate(45deg); }
-
-    /* CTA */
-    .cta-banner { background:linear-gradient(135deg,var(--violet-dark),var(--indigo)); color:var(--white); text-align:center; padding:80px 5%; }
-    .cta-banner h2 { font-size:clamp(1.6rem,3vw,2.4rem); margin-bottom:12px; }
-    .cta-banner p { opacity:.8; margin-bottom:32px; }
-
-    /* FOOTER */
-    footer { background:var(--grey-900); color:var(--grey-400); padding:40px 5%; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
-    .footer-logo { font-size:1.1rem; font-weight:800; color:var(--white); }
-    footer p { font-size:.825rem; }
-    footer a { color:var(--grey-400); text-decoration:none; }
-    footer a:hover { color:var(--white); }
-
-    /* RESPONSIVE */
-    @media (max-width:768px) {
-      nav { padding:0 4%; } .nav-links { display:none; }
-      .hero { padding:72px 4% 64px; } .hero-stats { gap:28px; }
-      section { padding:60px 4%; }
-      .packages-grid { grid-template-columns:1fr; }
-      .why-grid { grid-template-columns:1fr; }
-      footer { padding:32px 4%; flex-direction:column; align-items:flex-start; gap:12px; }
-      .summary-bar { padding:16px 4%; }
-      .summary-prices { gap:20px; }
-      .detail-grid { grid-template-columns:1fr; }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 56px 20px 48px; }
+      .wizard, .packages, .testimonials, .faq, .cta-banner { padding: 56px 20px; }
+      .builder { padding: 48px 20px 160px; }
+      .builder-header { flex-direction: column; align-items: stretch; }
+      .search-wrap { max-width: 100%; }
+      .services-grid { grid-template-columns: 1fr; }
+      .pkg-grid { grid-template-columns: 1fr; }
+      .tab-row { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+      .tab-btn { white-space: nowrap; flex-shrink: 0; }
+      .footer-inner { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; text-align: center; gap: 8px; }
     }
-    @media (max-width:480px) {
-      .hero h1 { font-size:clamp(1.8rem,8vw,2.4rem); }
-      .hero-actions { flex-direction:column; align-items:stretch; }
-      .btn-primary,.btn-outline { width:100%; justify-content:center; }
-      .hero-stats { flex-direction:column; gap:20px; padding-top:32px; margin-top:40px; }
-      .pkg-card { padding:28px 20px; }
-      .summary-bar { flex-direction:column; gap:12px; }
-      .summary-actions { width:100%; }
-      .summary-btn { flex:1; }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: clamp(1.9rem, 8vw, 2.5rem); letter-spacing: -1px; }
+      .hero-cta-row { flex-direction: column; align-items: stretch; }
+      .btn { width: 100%; }
+      .goal-grid { grid-template-columns: 1fr; }
+      .trust { gap: 12px 18px; }
     }
   </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <div class="nav-logo">NextMarketing</div>
   <ul class="nav-links">
+    <li><a href="#builder">Build Plan</a></li>
     <li><a href="#packages">Packages</a></li>
-    <li><a href="#calculator">Build Your Plan</a></li>
-    <li><a href="#details">Services</a></li>
+    <li><a href="#testimonials">Stories</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
-  <a href="#calculator" class="nav-cta">Build Your Plan</a>
+  <a href="#builder" class="nav-cta">Get Started</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">Marketing-as-a-Subscription</div>
-  <h1>Smart Marketing.<br /><span style="opacity:.85;">Predictable Growth.</span></h1>
-  <p>Enterprise-grade digital marketing, AI, sales, and CRM services — delivered as flexible monthly or yearly subscriptions. No retainers. No surprises.</p>
-  <div class="hero-actions">
-    <a href="#packages" class="btn-primary">View Packages</a>
-    <a href="#calculator" class="btn-outline">Build Your Own Plan</a>
-  </div>
-  <div class="hero-stats">
-    <div class="hero-stat"><strong>36+</strong><span>Service offerings</span></div>
-    <div class="hero-stat"><strong>4</strong><span>Bundle packages</span></div>
-    <div class="hero-stat"><strong>17%</strong><span>Saved on yearly plans</span></div>
-    <div class="hero-stat"><strong>Cancel</strong><span>Anytime, no lock-in</span></div>
+  <div class="hero-inner">
+    <div class="hero-pill"><span class="hero-pill-dot"></span>Trusted by 200+ growing businesses across APAC</div>
+    <h1>Marketing that actually <span class="gradient">delivers growth</span> — monthly.</h1>
+    <p class="lead">Pick the marketing, AI, sales and CRM services you need. Pay by card. Cancel anytime. No retainers, no lock-in — just predictable growth every month.</p>
+    <div class="hero-cta-row">
+      <a href="#wizard" class="btn btn-solid">Build Your Plan →</a>
+      <a href="#packages" class="btn btn-ghost">See Packages</a>
+    </div>
+    <div class="trust">
+      <div class="trust-item">36+ services</div>
+      <div class="trust-item">Pay by card</div>
+      <div class="trust-item">Cancel anytime</div>
+      <div class="trust-item">24hr activation</div>
+    </div>
   </div>
 </section>
 
-<!-- WHY -->
-<section class="why">
-  <div class="section-wrap" style="text-align:center;">
-    <div class="section-label">Why NextMarketing</div>
-    <h2>Marketing that works like software</h2>
-    <p class="section-sub" style="margin:0 auto;">Transparent pricing, a dedicated team, and measurable results — every month.</p>
-    <div class="why-grid" style="text-align:left;">
-      <div class="why-card"><div class="why-icon">💳</div><h3>Pay by Card, Instantly</h3><p>Subscribe online with your credit card. Services activate within 24 hours. No invoices, no waiting.</p></div>
-      <div class="why-card"><div class="why-icon">📊</div><h3>Predictable Pricing</h3><p>Flat monthly or yearly rates — no surprise overages, no hourly billing. Know exactly what you'll pay.</p></div>
-      <div class="why-card"><div class="why-icon">🤖</div><h3>AI-Powered Execution</h3><p>We use the latest AI tools to amplify output — faster content, smarter ads, better targeting.</p></div>
-      <div class="why-card"><div class="why-icon">🔄</div><h3>Flexible & Scalable</h3><p>Start small, add services as you grow. Upgrade, downgrade, or cancel at any time — no lock-in.</p></div>
-      <div class="why-card"><div class="why-icon">🤝</div><h3>Sales Staff Included</h3><p>Need boots on the ground? Augment your team with our trained sales reps — fully managed.</p></div>
-      <div class="why-card"><div class="why-icon">🌏</div><h3>Full Odoo CRM Pipeline</h3><p>From first lead to signed invoice — we set up and run your entire Odoo CRM and sales pipeline.</p></div>
+<!-- GOAL WIZARD -->
+<section class="wizard" id="wizard">
+  <div class="wizard-inner">
+    <div class="section-eyebrow">Step 1</div>
+    <h2 class="section-title">What's your #1 goal right now?</h2>
+    <p class="section-sub">Choose a goal — we'll highlight the services that fit best. You can always pick anything you want below.</p>
+    <div class="goal-grid">
+      <button class="goal-card goal-1" onclick="setGoal(this,'leads')">
+        <div class="goal-icon">🎯</div>
+        <div class="goal-title">Get More Leads</div>
+        <div class="goal-desc">Drive qualified traffic to your website and convert it into enquiries.</div>
+        <div class="goal-count">→ SEO, Ads, Content, AI</div>
+      </button>
+      <button class="goal-card goal-2" onclick="setGoal(this,'close')">
+        <div class="goal-icon">💼</div>
+        <div class="goal-title">Close More Deals</div>
+        <div class="goal-desc">Turn leads into revenue with sales enablement and a pro sales team.</div>
+        <div class="goal-count">→ Sales, Staff, Odoo CRM</div>
+      </button>
+      <button class="goal-card goal-3" onclick="setGoal(this,'automate')">
+        <div class="goal-icon">⚡</div>
+        <div class="goal-title">Automate Everything</div>
+        <div class="goal-desc">Deploy AI and automation to scale output without adding headcount.</div>
+        <div class="goal-count">→ AI, Automation, Chatbots</div>
+      </button>
+      <button class="goal-card goal-4" onclick="setGoal(this,'full')">
+        <div class="goal-icon">🚀</div>
+        <div class="goal-title">Full Growth Engine</div>
+        <div class="goal-desc">End-to-end: from first click to signed invoice — we run it all.</div>
+        <div class="goal-count">→ Everything included</div>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- BUILDER -->
+<section class="builder" id="builder">
+  <div class="builder-inner">
+    <div class="section-eyebrow">Step 2</div>
+    <h2 class="section-title">Pick the services you need</h2>
+    <p class="section-sub">Browse by category, search by name, or click a recommended service. Your total updates live on the right.</p>
+
+    <div class="builder-header" style="margin-top:20px;">
+      <div class="builder-title"><span id="visibleCount">36</span> services available</div>
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="search" class="search-input" id="searchInput" placeholder="Search services..." oninput="filterServices()" />
+      </div>
+    </div>
+
+    <div class="tab-row" id="tabRow">
+      <button class="tab-btn active" data-cat="all" onclick="filterTab(this)">All <span class="badge">36</span></button>
+      <button class="tab-btn" data-cat="seo" onclick="filterTab(this)">🔍 SEO</button>
+      <button class="tab-btn" data-cat="social" onclick="filterTab(this)">📱 Social</button>
+      <button class="tab-btn" data-cat="ads" onclick="filterTab(this)">📣 Ads</button>
+      <button class="tab-btn" data-cat="email" onclick="filterTab(this)">📧 Email</button>
+      <button class="tab-btn" data-cat="content" onclick="filterTab(this)">✍️ Content</button>
+      <button class="tab-btn" data-cat="automation" onclick="filterTab(this)">⚙️ Automation</button>
+      <button class="tab-btn" data-cat="ai" onclick="filterTab(this)">🤖 AI</button>
+      <button class="tab-btn" data-cat="conversion" onclick="filterTab(this)">🎯 CRO</button>
+      <button class="tab-btn" data-cat="influencer" onclick="filterTab(this)">🌟 PR</button>
+      <button class="tab-btn" data-cat="sales" onclick="filterTab(this)">💼 Sales</button>
+      <button class="tab-btn" data-cat="staff" onclick="filterTab(this)">🧑‍💼 Staff</button>
+      <button class="tab-btn" data-cat="odoo" onclick="filterTab(this)">🔶 Odoo CRM</button>
+    </div>
+
+    <div class="builder-body">
+      <!-- SERVICES GRID -->
+      <div class="services-grid" id="servicesGrid">
+        <!-- SEO -->
+        <div class="service-card" data-cat="seo" data-goal="leads full" data-mo="299" data-yr="2990" data-name="SEO Starter" onclick="toggleSvc(this)">
+          <div class="svc-cat-tag cat-seo">🔍 SEO</div>
+          <div class="svc-name">SEO Starter</div>
+          <div class="svc-desc">Monthly audit, on-page optimisation, and keyword tracking for up to 20 keywords.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$299<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="seo" data-goal="leads full" data-mo="699" data-yr="6990" data-name="SEO Growth">
+          <div class="svc-cat-tag cat-seo">🔍 SEO</div>
+          <div class="svc-name">SEO Growth</div>
+          <div class="svc-desc">Full on-page + backlinks + 4 SEO blog posts/mo, targeting 50+ keywords.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$699<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+
+        <!-- SOCIAL -->
+        <div class="service-card" data-cat="social" data-goal="leads full" data-mo="399" data-yr="3990" data-name="Social Media — 2 Platforms">
+          <div class="svc-cat-tag cat-social">📱 Social</div>
+          <div class="svc-name">Social Media — 2 Platforms</div>
+          <div class="svc-desc">8 posts/mo, content calendar, branded graphics, community replies.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$399<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="social" data-goal="leads full" data-mo="699" data-yr="6990" data-name="Social Media — 4 Platforms">
+          <div class="svc-cat-tag cat-social">📱 Social</div>
+          <div class="svc-name">Social Media — 4 Platforms</div>
+          <div class="svc-desc">16 posts/mo across Instagram, Facebook, LinkedIn, TikTok or X.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$699<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+
+        <!-- ADS -->
+        <div class="service-card" data-cat="ads" data-goal="leads full" data-mo="499" data-yr="4990" data-name="Google Ads Management">
+          <div class="svc-cat-tag cat-ads">📣 Ads</div>
+          <div class="svc-name">Google Ads Management</div>
+          <div class="svc-desc">Campaign setup, bid optimisation, A/B ad copy, weekly review — up to $5k spend.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$499<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="ads" data-goal="leads full" data-mo="499" data-yr="4990" data-name="Meta Ads Management">
+          <div class="svc-cat-tag cat-ads">📣 Ads</div>
+          <div class="svc-name">Meta Ads Management</div>
+          <div class="svc-desc">Facebook + Instagram campaigns, audience targeting, retargeting, creative testing.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$499<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="ads" data-goal="leads full" data-mo="599" data-yr="5990" data-name="LinkedIn Ads Management">
+          <div class="svc-cat-tag cat-ads">📣 Ads</div>
+          <div class="svc-name">LinkedIn Ads Management</div>
+          <div class="svc-desc">B2B lead gen, Sponsored Content, InMail, targeting by job title &amp; industry.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$599<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="service-card" data-cat="email" data-goal="leads close full" data-mo="299" data-yr="2990" data-name="Email Marketing — Starter">
+          <div class="svc-cat-tag cat-email">📧 Email</div>
+          <div class="svc-name">Email Marketing — Starter</div>
+          <div class="svc-desc">Up to 5,000 contacts, 4 campaigns/mo, template design, A/B subject lines.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$299<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="email" data-goal="leads close full" data-mo="599" data-yr="5990" data-name="Email Marketing — Pro">
+          <div class="svc-cat-tag cat-email">📧 Email</div>
+          <div class="svc-name">Email Marketing — Pro</div>
+          <div class="svc-desc">25,000 contacts, 8 campaigns/mo, segmentation, behavioural triggers.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$599<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="service-card" data-cat="content" data-goal="leads full" data-mo="299" data-yr="2990" data-name="Content Writing — Starter">
+          <div class="svc-cat-tag cat-content">✍️ Content</div>
+          <div class="svc-name">Content Writing — Starter</div>
+          <div class="svc-desc">4 SEO blog posts/mo (800–1,200 words each), keyword-researched topics.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$299<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="content" data-goal="leads full" data-mo="499" data-yr="4990" data-name="Content Writing — Pro">
+          <div class="svc-cat-tag cat-content">✍️ Content</div>
+          <div class="svc-name">Content Writing — Pro</div>
+          <div class="svc-desc">8 SEO blog posts/mo, pillar content strategy, internal linking plan.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$499<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="content" data-goal="leads full" data-mo="349" data-yr="3490" data-name="Graphic Design">
+          <div class="svc-cat-tag cat-content">✍️ Content</div>
+          <div class="svc-name">Graphic Design</div>
+          <div class="svc-desc">10 branded assets/mo — social, ads, email headers, infographics.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$349<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="content" data-goal="leads full" data-mo="599" data-yr="5990" data-name="Short-Form Video">
+          <div class="svc-cat-tag cat-content">✍️ Content</div>
+          <div class="svc-name">Short-Form Video</div>
+          <div class="svc-desc">4 reels/shorts per month — scripted, edited, captioned, platform-optimised.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$599<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+
+        <!-- CRO -->
+        <div class="service-card" data-cat="conversion" data-goal="leads close full" data-mo="199" data-yr="1990" data-name="Landing Page CRO">
+          <div class="svc-cat-tag cat-conversion">🎯 CRO</div>
+          <div class="svc-name">Landing Page CRO Audit</div>
+          <div class="svc-desc">Monthly heatmap review, UX analysis, A/B test plan, headline suggestions.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$199<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+
+        <!-- ANALYTICS - listed as content group -->
+        <div class="service-card" data-cat="conversion" data-goal="leads close full" data-mo="149" data-yr="1490" data-name="Monthly Analytics Report">
+          <div class="svc-cat-tag cat-conversion">📊 Reporting</div>
+          <div class="svc-name">Monthly Analytics Report</div>
+          <div class="svc-desc">GA4 + ads + social dashboards, KPI tracking, actionable insights.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$149<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+
+        <!-- AUTOMATION -->
+        <div class="service-card" data-cat="automation" data-goal="automate full" data-mo="499" data-yr="4990" data-name="Marketing Automation — Starter">
+          <div class="svc-cat-tag cat-automation">⚙️ Automation</div>
+          <div class="svc-name">Marketing Automation — Starter</div>
+          <div class="svc-desc">Welcome sequences, lead nurture drips, CRM sync, form-to-email flows.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$499<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="automation" data-goal="automate full" data-mo="899" data-yr="8990" data-name="Marketing Automation — Pro">
+          <div class="svc-cat-tag cat-automation">⚙️ Automation</div>
+          <div class="svc-name">Marketing Automation — Pro</div>
+          <div class="svc-desc">Multi-channel workflows, behavioural triggers, lead scoring, A/B splits.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$899<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+
+        <!-- AI -->
+        <div class="service-card" data-cat="ai" data-goal="automate full" data-mo="299" data-yr="2990" data-name="AI Content Generation">
+          <div class="svc-cat-tag cat-ai">🤖 AI</div>
+          <div class="svc-name">AI Content Generation</div>
+          <div class="svc-desc">AI-assisted blogs, captions, ad copy, product descriptions — 20+ pieces/mo.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$299<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="ai" data-goal="automate full" data-mo="399" data-yr="3990" data-name="AI Ad Optimisation">
+          <div class="svc-cat-tag cat-ai">🤖 AI</div>
+          <div class="svc-name">AI Ad Optimisation</div>
+          <div class="svc-desc">AI bid management, audience lookalikes, predictive budget allocation.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$399<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="ai" data-goal="automate leads full" data-mo="499" data-yr="4990" data-name="AI Marketing Chatbot">
+          <div class="svc-cat-tag cat-ai">🤖 AI</div>
+          <div class="svc-name">AI Marketing Chatbot</div>
+          <div class="svc-desc">Website lead-capture bot, FAQ automation, live handoff to sales, 24/7.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$499<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="ai" data-goal="automate full" data-mo="999" data-yr="9990" data-name="Full AI Marketing Suite">
+          <div class="svc-cat-tag cat-ai">🤖 AI</div>
+          <div class="svc-name">Full AI Marketing Suite</div>
+          <div class="svc-desc">All 3 AI services + sentiment monitoring + monthly AI strategy session.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$999<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+
+        <!-- INFLUENCER/PR -->
+        <div class="service-card" data-cat="influencer" data-goal="leads full" data-mo="699" data-yr="6990" data-name="Influencer Outreach">
+          <div class="svc-cat-tag cat-influencer">🌟 Influencer</div>
+          <div class="svc-name">Influencer Outreach</div>
+          <div class="svc-desc">Identify, brief &amp; manage up to 5 micro-influencers per month.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$699<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="influencer" data-goal="leads full" data-mo="899" data-yr="8990" data-name="PR & Media Coverage">
+          <div class="svc-cat-tag cat-influencer">🌟 PR</div>
+          <div class="svc-name">PR &amp; Media Coverage</div>
+          <div class="svc-desc">Press release + distribution, up to 3 placements/mo, journalist outreach.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$899<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="influencer" data-goal="leads full" data-mo="249" data-yr="2490" data-name="Reputation Management">
+          <div class="svc-cat-tag cat-influencer">🌟 Reputation</div>
+          <div class="svc-name">Reputation Management</div>
+          <div class="svc-desc">Google/Trustpilot review monitoring, response management, alerts.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$249<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+
+        <!-- MESSAGING -->
+        <div class="service-card" data-cat="messaging" data-goal="leads close full" data-mo="299" data-yr="2990" data-name="WhatsApp/SMS Campaigns">
+          <div class="svc-cat-tag cat-messaging">💬 Messaging</div>
+          <div class="svc-name">WhatsApp / SMS Campaigns</div>
+          <div class="svc-desc">Broadcast campaigns, drip sequences, opt-in list management, reporting.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$299<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+
+        <!-- SALES -->
+        <div class="service-card" data-cat="sales" data-goal="close full" data-mo="599" data-yr="5990" data-name="Sales Funnel Strategy">
+          <div class="svc-cat-tag cat-sales">💼 Sales</div>
+          <div class="svc-name">Sales Funnel Strategy &amp; Setup</div>
+          <div class="svc-desc">Map buyer journey, design funnel stages, configure CRM pipeline, set KPIs.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$599<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="sales" data-goal="close full" data-mo="499" data-yr="4990" data-name="Sales Collateral Creation">
+          <div class="svc-cat-tag cat-sales">💼 Sales</div>
+          <div class="svc-name">Sales Collateral Creation</div>
+          <div class="svc-desc">Pitch decks, one-pagers, capability statements, proposal templates — 3/mo.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$499<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="sales" data-goal="close full" data-mo="399" data-yr="3990" data-name="Sales Enablement Content">
+          <div class="svc-cat-tag cat-sales">💼 Sales</div>
+          <div class="svc-name">Sales Enablement Content</div>
+          <div class="svc-desc">Battle cards, case studies, objection-handling guides, competitor comparisons.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$399<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+
+        <!-- STAFF -->
+        <div class="service-card" data-cat="staff" data-goal="close full" data-mo="1499" data-yr="14990" data-name="Junior Sales Rep">
+          <div class="svc-cat-tag cat-staff">🧑‍💼 Staff</div>
+          <div class="svc-name">Junior Sales Rep (80 hrs/mo)</div>
+          <div class="svc-desc">Trained SDR: prospecting, cold outreach, lead qualification, CRM updates.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$1,499<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="staff" data-goal="close full" data-mo="2499" data-yr="24990" data-name="Senior Sales Rep">
+          <div class="svc-cat-tag cat-staff">🧑‍💼 Staff</div>
+          <div class="svc-name">Senior Sales Rep (80 hrs/mo)</div>
+          <div class="svc-desc">Experienced AE: demos, proposals, negotiations, closing. Your product, our rep.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$2,499<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="staff" data-goal="close full" data-mo="3999" data-yr="39990" data-name="Full-Time Dedicated Rep">
+          <div class="svc-cat-tag cat-staff">🧑‍💼 Staff</div>
+          <div class="svc-name">Full-Time Dedicated Rep</div>
+          <div class="svc-desc">160 hrs/mo, full pipeline ownership, weekly reporting to your team.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$3,999<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="staff" data-goal="close full" data-mo="2999" data-yr="29990" data-name="Fractional Sales Manager">
+          <div class="svc-cat-tag cat-staff">🧑‍💼 Staff</div>
+          <div class="svc-name">Fractional Sales Manager</div>
+          <div class="svc-desc">Part-time sales leader: coaching, pipeline review, forecasting, hiring support.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$2,999<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+
+        <!-- ODOO -->
+        <div class="service-card" data-cat="odoo" data-goal="close full" data-mo="799" data-yr="7990" data-name="Odoo CRM Setup">
+          <div class="svc-cat-tag cat-odoo">🔶 Odoo</div>
+          <div class="svc-name">Odoo CRM Setup &amp; Lead Mgmt</div>
+          <div class="svc-desc">Pipeline config, lead forms, scoring rules, auto-assignment, monthly admin.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$799<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="odoo" data-goal="close full" data-mo="399" data-yr="3990" data-name="Online Booking Integration">
+          <div class="svc-cat-tag cat-odoo">🔶 Odoo</div>
+          <div class="svc-name">Online Booking &amp; Calendar</div>
+          <div class="svc-desc">Odoo Appointments setup, calendar sync, auto confirmations &amp; reminders.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$399<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="odoo" data-goal="close full" data-mo="599" data-yr="5990" data-name="Quote, E-Sign & Invoice">
+          <div class="svc-cat-tag cat-odoo">🔶 Odoo</div>
+          <div class="svc-name">Quote, E-Sign &amp; Invoice</div>
+          <div class="svc-desc">Quotation templates, e-signature workflow, auto-invoice, payment reminders.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$599<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+        <div class="service-card" data-cat="odoo" data-goal="close full" data-mo="1499" data-yr="14990" data-name="Full Sales Pipeline Suite">
+          <div class="svc-cat-tag cat-odoo">🔶 Odoo</div>
+          <div class="svc-name">Full Sales Pipeline Suite</div>
+          <div class="svc-desc">Leads → CRM → Booking → Quote → Chat → E-Sign → Invoice. All connected.</div>
+          <div class="svc-price-row"><div class="svc-price" data-price="mo">$1,499<span>/mo</span></div><button class="svc-add">Add</button></div>
+        </div>
+      </div>
+
+      <!-- CART -->
+      <aside class="cart" id="cart">
+        <div class="cart-mobile-bar" onclick="toggleCart()">
+          <div><strong id="cartMobileTotal">$0</strong> <span style="color:var(--grey-500);font-size:.8rem;"><span id="cartMobileCount">0</span> selected</span></div>
+        </div>
+
+        <div class="cart-head">
+          <div class="cart-title">Your Plan</div>
+          <span class="cart-count"><span id="cartCount">0</span> items</span>
+        </div>
+
+        <div class="cart-toggle">
+          <button class="cart-toggle-btn active" id="toggleMo" onclick="setBilling('mo')">Monthly</button>
+          <button class="cart-toggle-btn" id="toggleYr" onclick="setBilling('yr')">Yearly <span class="save-chip">−17%</span></button>
+        </div>
+
+        <div class="cart-items" id="cartItems">
+          <div class="cart-empty" id="cartEmpty">
+            <div class="cart-empty-icon">🛒</div>
+            No services selected yet.<br/>
+            Click any service to add it.
+          </div>
+        </div>
+
+        <div class="cart-rec" id="cartRec"></div>
+
+        <div class="cart-total-row">
+          <span class="cart-total-label">Total</span>
+          <div style="text-align:right;">
+            <div class="cart-total-value"><span id="cartTotal">$0</span><span id="cartPeriod">/mo</span></div>
+            <div class="cart-savings" id="cartSavings"></div>
+          </div>
+        </div>
+
+        <button class="cart-checkout" onclick="checkout()">Get Quote →</button>
+        <button class="cart-clear" onclick="clearAll()">Clear selection</button>
+      </aside>
     </div>
   </div>
 </section>
 
 <!-- PACKAGES -->
-<section id="packages">
-  <div class="section-wrap">
-    <div style="text-align:center;">
-      <div class="section-label">Bundle Packages</div>
-      <h2>All-in-one marketing plans</h2>
-      <p class="section-sub" style="margin:0 auto;">Pick a package and get everything you need in one subscription.</p>
+<section class="packages" id="packages">
+  <div class="pkg-inner">
+    <div class="section-eyebrow">Or pick a bundle</div>
+    <h2 class="section-title">Pre-built packages for faster onboarding</h2>
+    <p class="section-sub">Skip the builder — get everything bundled, often cheaper than picking individually.</p>
+
+    <div class="pkg-toggle-wrap-center">
+      <div class="pkg-toggle-wrap">
+        <button class="pkg-toggle-btn active" id="pkgMoBtn" onclick="togglePkg('mo')">Monthly</button>
+        <button class="pkg-toggle-btn" id="pkgYrBtn" onclick="togglePkg('yr')">Yearly (save 17%)</button>
+      </div>
     </div>
-    <div class="toggle-wrap">
-      <span class="toggle-label active" id="lbl-monthly">Monthly</span>
-      <button class="toggle-switch yearly" id="billingToggle" aria-label="Toggle billing period" onclick="toggleBilling()"></button>
-      <span class="toggle-label" id="lbl-yearly">Yearly <span class="savings-badge">Save 17%</span></span>
-    </div>
-    <div class="packages-grid">
+
+    <div class="pkg-grid">
       <div class="pkg-card">
         <div class="pkg-name">Starter</div>
-        <div class="pkg-price" id="price-starter">$799<span>/mo</span></div>
-        <div class="pkg-price-yr" id="subprice-starter">Save $1,598 vs monthly</div>
-        <p class="pkg-desc">Perfect for small businesses launching their digital presence.</p>
+        <div class="pkg-price" id="pkgPrice-s">$799<span>/mo</span></div>
+        <div class="pkg-price-sub" id="pkgSub-s">Billed monthly · Cancel anytime</div>
+        <p class="pkg-desc">For small businesses launching their digital presence.</p>
         <ul class="pkg-features">
-          <li>SEO Starter — audit &amp; on-page optimisation</li>
-          <li>Social Media — 2 platforms, 8 posts/mo</li>
+          <li>SEO Starter (audit + on-page)</li>
+          <li>Social Media — 2 platforms (8 posts/mo)</li>
           <li>Monthly Analytics Report</li>
           <li>Dedicated account manager</li>
-          <li>Email support</li>
         </ul>
-        <a href="#calculator" class="pkg-btn outline">Get Started</a>
+        <button class="pkg-btn outline" onclick="applyPackage('starter')">Choose Starter</button>
       </div>
       <div class="pkg-card featured">
         <div class="pkg-popular">Most Popular</div>
         <div class="pkg-name">Growth</div>
-        <div class="pkg-price" id="price-growth">$1,799<span>/mo</span></div>
-        <div class="pkg-price-yr" id="subprice-growth">Save $3,598 vs monthly</div>
-        <p class="pkg-desc">For businesses ready to scale with multi-channel marketing.</p>
+        <div class="pkg-price" id="pkgPrice-g">$1,799<span>/mo</span></div>
+        <div class="pkg-price-sub" id="pkgSub-g">Billed monthly · Cancel anytime</div>
+        <p class="pkg-desc">For businesses scaling with multi-channel marketing.</p>
         <ul class="pkg-features">
-          <li>SEO Growth — full on-page, backlinks &amp; 4 blogs/mo</li>
-          <li>Social Media — 4 platforms, 16 posts/mo</li>
-          <li>Google Ads Management (up to $5k spend)</li>
-          <li>Email Marketing — 5k contacts, 4 campaigns/mo</li>
-          <li>Monthly Analytics Report</li>
-          <li>Priority support &amp; monthly strategy call</li>
+          <li>SEO Growth + 4 blogs/mo</li>
+          <li>Social — 4 platforms (16 posts/mo)</li>
+          <li>Google Ads Management</li>
+          <li>Email Marketing (5k contacts)</li>
+          <li>Priority support + monthly strategy call</li>
         </ul>
-        <a href="#calculator" class="pkg-btn">Get Started</a>
+        <button class="pkg-btn" onclick="applyPackage('growth')">Choose Growth</button>
       </div>
       <div class="pkg-card">
         <div class="pkg-name">Scale</div>
-        <div class="pkg-price" id="price-scale">$2,999<span>/mo</span></div>
-        <div class="pkg-price-yr" id="subprice-scale">Save $5,998 vs monthly</div>
+        <div class="pkg-price" id="pkgPrice-x">$2,999<span>/mo</span></div>
+        <div class="pkg-price-sub" id="pkgSub-x">Billed monthly · Cancel anytime</div>
         <p class="pkg-desc">Full-stack marketing for high-growth companies.</p>
         <ul class="pkg-features">
           <li>Everything in Growth</li>
-          <li>Meta Ads (Facebook &amp; Instagram)</li>
-          <li>Content Writing — 8 SEO blogs/mo</li>
-          <li>Short-Form Video — 4 reels/mo</li>
+          <li>Meta Ads + Short-Form Video</li>
+          <li>Content Pro (8 blogs) + Graphic Design</li>
           <li>Marketing Automation Pro</li>
-          <li>Graphic Design — 10 branded assets/mo</li>
           <li>Bi-weekly strategy calls</li>
         </ul>
-        <a href="#calculator" class="pkg-btn outline">Get Started</a>
+        <button class="pkg-btn outline" onclick="applyPackage('scale')">Choose Scale</button>
       </div>
       <div class="pkg-card">
         <div class="pkg-name">Enterprise</div>
         <div class="pkg-price">Custom</div>
-        <div class="pkg-price-yr">Tailored to your goals</div>
-        <p class="pkg-desc">Dedicated marketing team, fully customised to your brand and budget.</p>
+        <div class="pkg-price-sub">Tailored to your goals</div>
+        <p class="pkg-desc">Dedicated team, full sales pipeline, all channels.</p>
         <ul class="pkg-features">
-          <li>All channels — SEO, ads, content, social, PR</li>
-          <li>Dedicated marketing team (not shared)</li>
-          <li>Sales staff augmentation included</li>
-          <li>Full Odoo CRM pipeline management</li>
+          <li>Dedicated marketing team</li>
+          <li>Sales staff augmentation</li>
+          <li>Full Odoo CRM pipeline</li>
           <li>SLA-backed delivery</li>
           <li>Quarterly business reviews</li>
         </ul>
-        <a href="mailto:hello@nextmarketing.io" class="pkg-btn outline">Contact Sales</a>
+        <a href="mailto:hello@nextmarketing.io" class="pkg-btn outline" style="text-decoration:none;">Contact Sales</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CHECKBOX CALCULATOR -->
-<section class="calculator" id="calculator">
-  <div class="section-wrap">
-    <div class="calc-header">
-      <div>
-        <div class="section-label">Build Your Plan</div>
-        <h2>Pick exactly what you need</h2>
-        <p class="section-sub">Check any service to add it. Your running total appears at the bottom.</p>
-      </div>
-      <div class="calc-toggle-wrap">
-        <span class="calc-toggle-label active" id="calc-lbl-monthly">Monthly</span>
-        <button class="toggle-switch monthly" id="calcToggle" aria-label="Toggle billing" onclick="toggleCalc()"></button>
-        <span class="calc-toggle-label" id="calc-lbl-yearly">Yearly <span class="savings-badge">−17%</span></span>
-      </div>
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-inner">
+    <div class="section-eyebrow">Trusted by growing teams</div>
+    <h2 class="section-title">Results, not promises</h2>
+    <p class="section-sub">See what companies achieve in their first 90 days.</p>
+
+    <div class="logos-strip">
+      <div class="logo-item">FINTECH.IO</div>
+      <div class="logo-item">Lumina&amp;Co</div>
+      <div class="logo-item">STACKWORKS</div>
+      <div class="logo-item">Orbital</div>
+      <div class="logo-item">NORDIC · SG</div>
+      <div class="logo-item">Meridian Labs</div>
     </div>
 
-    <div style="overflow-x:auto;">
-    <table class="calc-table">
-      <thead>
-        <tr>
-          <th class="th-check">✓</th>
-          <th>Service</th>
-          <th class="th-price" id="calc-th-price">Monthly Price</th>
-        </tr>
-      </thead>
-      <tbody id="calc-tbody">
-        <!-- SEO -->
-        <tr class="cat-header"><td colspan="3">🔍 Search Engine Optimisation (SEO)</td></tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="299" data-yearly="2990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">SEO Starter</div><div class="svc-desc">Monthly audit, on-page optimisation, keyword tracking for up to 20 keywords</div></td>
-          <td class="td-price svc-price">$299/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="699" data-yearly="6990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">SEO Growth <span class="service-tag">Most Popular</span></div><div class="svc-desc">Full on-page + backlink outreach + 4 SEO blog posts per month, 50+ keywords</div></td>
-          <td class="td-price svc-price">$699/mo</td>
-        </tr>
-
-        <!-- Social Media -->
-        <tr class="cat-header"><td colspan="3">📱 Social Media Management</td></tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="399" data-yearly="3990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Social Media — 2 Platforms</div><div class="svc-desc">8 posts/mo, content calendar, community replies, Instagram + Facebook or LinkedIn</div></td>
-          <td class="td-price svc-price">$399/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="699" data-yearly="6990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Social Media — 4 Platforms</div><div class="svc-desc">16 posts/mo across Instagram, Facebook, LinkedIn, TikTok or X — full scheduling</div></td>
-          <td class="td-price svc-price">$699/mo</td>
-        </tr>
-
-        <!-- Paid Ads -->
-        <tr class="cat-header"><td colspan="3">📣 Paid Advertising (PPC)</td></tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="499" data-yearly="4990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Google Ads Management</div><div class="svc-desc">Campaign setup, keyword bidding, A/B ad copy testing, weekly optimisation — up to $5k ad spend</div></td>
-          <td class="td-price svc-price">$499/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="499" data-yearly="4990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Meta Ads Management</div><div class="svc-desc">Facebook &amp; Instagram campaigns, audience targeting, retargeting, creative testing</div></td>
-          <td class="td-price svc-price">$499/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="599" data-yearly="5990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">LinkedIn Ads Management</div><div class="svc-desc">B2B lead gen campaigns, Sponsored Content, InMail, audience by job title/industry</div></td>
-          <td class="td-price svc-price">$599/mo</td>
-        </tr>
-
-        <!-- Email -->
-        <tr class="cat-header"><td colspan="3">📧 Email Marketing</td></tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="299" data-yearly="2990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Email Marketing — Starter</div><div class="svc-desc">Up to 5,000 contacts, 4 campaigns/mo, template design, open/click reporting</div></td>
-          <td class="td-price svc-price">$299/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="599" data-yearly="5990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Email Marketing — Pro</div><div class="svc-desc">Up to 25,000 contacts, 8 campaigns/mo, list segmentation, A/B subject testing</div></td>
-          <td class="td-price svc-price">$599/mo</td>
-        </tr>
-
-        <!-- Content -->
-        <tr class="cat-header"><td colspan="3">✍️ Content Creation</td></tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="299" data-yearly="2990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Content Writing — Starter</div><div class="svc-desc">4 SEO-optimised blog posts/mo, 800–1,200 words each, keyword-researched topics</div></td>
-          <td class="td-price svc-price">$299/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="499" data-yearly="4990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Content Writing — Pro</div><div class="svc-desc">8 SEO blog posts/mo, pillar content strategy, internal linking plan, meta copy</div></td>
-          <td class="td-price svc-price">$499/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="349" data-yearly="3490">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Graphic Design</div><div class="svc-desc">10 branded assets/mo — social graphics, banners, ads, email headers, infographics</div></td>
-          <td class="td-price svc-price">$349/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="599" data-yearly="5990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Short-Form Video Production</div><div class="svc-desc">4 reels or shorts/mo, scripted, filmed or edited from supplied footage, captioned</div></td>
-          <td class="td-price svc-price">$599/mo</td>
-        </tr>
-
-        <!-- CRO -->
-        <tr class="cat-header"><td colspan="3">🎯 Conversion Rate Optimisation (CRO)</td></tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="199" data-yearly="1990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Landing Page CRO Audit &amp; Recommendations</div><div class="svc-desc">Monthly heatmap review, UX analysis, A/B test plan, headline &amp; CTA suggestions</div></td>
-          <td class="td-price svc-price">$199/mo</td>
-        </tr>
-
-        <!-- Analytics -->
-        <tr class="cat-header"><td colspan="3">📊 Analytics &amp; Reporting</td></tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="149" data-yearly="1490">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Monthly Analytics &amp; Performance Report</div><div class="svc-desc">GA4 + ads + social in one dashboard report, KPI tracking, actionable insights</div></td>
-          <td class="td-price svc-price">$149/mo</td>
-        </tr>
-
-        <!-- Marketing Automation -->
-        <tr class="cat-header"><td colspan="3">⚙️ Marketing Automation</td></tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="499" data-yearly="4990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Marketing Automation — Starter</div><div class="svc-desc">Welcome sequences, lead nurture drips, CRM sync, form-to-email automation</div></td>
-          <td class="td-price svc-price">$499/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="899" data-yearly="8990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Marketing Automation — Pro <span class="service-tag">Advanced</span></div><div class="svc-desc">Multi-channel workflows, behavioural triggers, lead scoring, A/B split automation</div></td>
-          <td class="td-price svc-price">$899/mo</td>
-        </tr>
-
-        <!-- Marketing AI -->
-        <tr class="cat-header"><td colspan="3">🤖 Marketing AI</td></tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="299" data-yearly="2990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">AI Content Generation</div><div class="svc-desc">AI-assisted blog posts, social captions, ad copy, product descriptions — 20+ pieces/mo</div></td>
-          <td class="td-price svc-price">$299/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="399" data-yearly="3990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">AI Ad Optimisation</div><div class="svc-desc">AI-powered bid management, audience lookalike expansion, predictive budget allocation</div></td>
-          <td class="td-price svc-price">$399/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="499" data-yearly="4990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">AI Marketing Chatbot</div><div class="svc-desc">Website lead-capture chatbot, FAQ automation, live handoff to sales, 24/7 availability</div></td>
-          <td class="td-price svc-price">$499/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="999" data-yearly="9990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Full AI Marketing Suite <span class="service-tag">Best Value</span></div><div class="svc-desc">All 3 AI services above + AI sentiment monitoring + monthly AI strategy session</div></td>
-          <td class="td-price svc-price">$999/mo</td>
-        </tr>
-
-        <!-- Influencer PR -->
-        <tr class="cat-header"><td colspan="3">🌟 Influencer, PR &amp; Reputation</td></tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="699" data-yearly="6990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Influencer Outreach &amp; Management</div><div class="svc-desc">Identify, brief, and manage up to 5 micro-influencers/mo, content approval, reporting</div></td>
-          <td class="td-price svc-price">$699/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="899" data-yearly="8990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">PR &amp; Media Coverage</div><div class="svc-desc">Press release writing + distribution, up to 3 media placements/mo, journalist outreach</div></td>
-          <td class="td-price svc-price">$899/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="249" data-yearly="2490">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Reputation Management &amp; Review Monitoring</div><div class="svc-desc">Google/Trustpilot review monitoring, response management, alert notifications</div></td>
-          <td class="td-price svc-price">$249/mo</td>
-        </tr>
-
-        <!-- Messaging -->
-        <tr class="cat-header"><td colspan="3">💬 Messaging Campaigns</td></tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="299" data-yearly="2990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">WhatsApp / SMS Campaign Management</div><div class="svc-desc">Broadcast campaigns, drip sequences, opt-in list management, delivery reporting</div></td>
-          <td class="td-price svc-price">$299/mo</td>
-        </tr>
-
-        <!-- Sales Services -->
-        <tr class="cat-header"><td colspan="3">💼 Sales Services</td></tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="599" data-yearly="5990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Sales Funnel Strategy &amp; Setup</div><div class="svc-desc">Map your buyer journey, design funnel stages, configure CRM pipeline, define KPIs</div></td>
-          <td class="td-price svc-price">$599/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="499" data-yearly="4990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Sales Collateral Creation</div><div class="svc-desc">Pitch decks, one-pagers, capability statements, proposal templates — up to 3/mo</div></td>
-          <td class="td-price svc-price">$499/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="399" data-yearly="3990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Sales Enablement Content</div><div class="svc-desc">Battle cards, case studies, objection-handling guides, competitor comparison sheets</div></td>
-          <td class="td-price svc-price">$399/mo</td>
-        </tr>
-
-        <!-- Sales Staff Augmentation -->
-        <tr class="cat-header"><td colspan="3">🧑‍💼 Sales Staff Augmentation</td></tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="1499" data-yearly="14990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Junior Sales Rep <span class="service-tag">80 hrs/mo</span></div><div class="svc-desc">Trained SDR handles prospecting, cold outreach, lead qualification, CRM updates</div></td>
-          <td class="td-price svc-price">$1,499/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="2499" data-yearly="24990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Senior Sales Rep <span class="service-tag">80 hrs/mo</span></div><div class="svc-desc">Experienced AE handles demos, proposals, negotiations, closing — your product, our rep</div></td>
-          <td class="td-price svc-price">$2,499/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="3999" data-yearly="39990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Full-Time Dedicated Sales Rep</div><div class="svc-desc">160 hrs/mo dedicated rep, full pipeline ownership, weekly reporting to your team</div></td>
-          <td class="td-price svc-price">$3,999/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="2999" data-yearly="29990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Fractional Sales Manager</div><div class="svc-desc">Part-time sales leader: team coaching, pipeline review, forecast reporting, hiring support</div></td>
-          <td class="td-price svc-price">$2,999/mo</td>
-        </tr>
-
-        <!-- Odoo CRM -->
-        <tr class="cat-header"><td colspan="3">🔶 Odoo CRM &amp; Full Sales Pipeline</td></tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="799" data-yearly="7990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Odoo CRM Setup &amp; Lead Management</div><div class="svc-desc">Pipeline config, lead capture forms, scoring rules, automated assignment, monthly admin</div></td>
-          <td class="td-price svc-price">$799/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="399" data-yearly="3990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Online Booking &amp; Calendar Integration</div><div class="svc-desc">Odoo Appointments setup, calendar sync, automated confirmations &amp; reminders</div></td>
-          <td class="td-price svc-price">$399/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="599" data-yearly="5990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Quote, E-Sign &amp; Invoice Automation</div><div class="svc-desc">Odoo quotation templates, e-signature workflow, auto-invoice on approval, payment follow-up</div></td>
-          <td class="td-price svc-price">$599/mo</td>
-        </tr>
-        <tr class="svc-row" onclick="toggleRow(this)" data-monthly="1499" data-yearly="14990">
-          <td class="td-check"><input type="checkbox" class="svc-checkbox" onclick="event.stopPropagation();" onchange="updateTotals()"></td>
-          <td><div class="svc-name">Full Sales Pipeline Suite <span class="service-tag">Best Value</span></div><div class="svc-desc">Everything: Leads → CRM → Booking → Presentation → Quote → Live Chat → E-Sign → Invoice</div></td>
-          <td class="td-price svc-price">$1,499/mo</td>
-        </tr>
-      </tbody>
-    </table>
-    </div>
-  </div>
-</section>
-
-<!-- STICKY SUMMARY BAR -->
-<div class="summary-bar hidden" id="summaryBar">
-  <div class="summary-left">
-    <span class="summary-count" id="summaryCount">0 services selected</span>
-    <div class="summary-prices">
-      <div class="summary-price-item">
-        <span class="summary-price-label">Monthly</span>
-        <span class="summary-price-value" id="summaryMonthly">$0</span>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Our Google Ads ROAS went from 1.2× to 4.8× in 60 days. Same budget, 4× more pipeline. The team just <em>knows</em> what they're doing."</p>
+        <div class="testi-author"><div class="testi-avatar">RK</div><div class="testi-info"><strong>Raj Kumar</strong><span>VP Growth · HR SaaS, Singapore</span></div></div>
       </div>
-      <div class="summary-price-item">
-        <span class="summary-price-label">Yearly</span>
-        <span class="summary-price-value" id="summaryYearly">$0</span>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"We replaced a full-time SDR hire with the Senior Sales Rep package. Onboarded in a week, closed a $28k deal in week 3. Zero HR overhead."</p>
+        <div class="testi-author"><div class="testi-avatar">SL</div><div class="testi-info"><strong>Sarah Lim</strong><span>Founder · Cloud Services, Manila</span></div></div>
       </div>
-      <div class="summary-price-item" style="align-self:center;">
-        <span class="savings-badge" id="summarySavings">Save $0/yr</span>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"The Full Odoo Pipeline Suite cut our sales cycle from 14 days to 4. Clients self-book, e-sign, and we invoice the same day. Revenue up 34%."</p>
+        <div class="testi-author"><div class="testi-avatar">MT</div><div class="testi-info"><strong>Michael Tan</strong><span>COO · Staffing Firm, Singapore</span></div></div>
       </div>
     </div>
   </div>
-  <div class="summary-actions">
-    <button class="summary-btn-clear" onclick="clearAll()">Clear all</button>
-    <button class="summary-btn" onclick="window.location.href='mailto:hello@nextmarketing.io?subject=NextMarketing Plan Enquiry'">Get Quote →</button>
-  </div>
-</div>
-
-<!-- SERVICE DETAILS -->
-<section class="svc-details" id="details">
-  <div class="section-wrap">
-    <div class="section-label">Service Details</div>
-    <h2>What's included — with examples</h2>
-    <p class="section-sub">Click a category to explore what each service delivers in practice.</p>
-
-    <div class="detail-cats" style="margin-top:28px;">
-      <button class="detail-cat-btn active" onclick="filterDetails('all', this)">All Services</button>
-      <button class="detail-cat-btn" onclick="filterDetails('seo', this)">🔍 SEO</button>
-      <button class="detail-cat-btn" onclick="filterDetails('social', this)">📱 Social</button>
-      <button class="detail-cat-btn" onclick="filterDetails('ads', this)">📣 Ads</button>
-      <button class="detail-cat-btn" onclick="filterDetails('email', this)">📧 Email</button>
-      <button class="detail-cat-btn" onclick="filterDetails('content', this)">✍️ Content</button>
-      <button class="detail-cat-btn" onclick="filterDetails('automation', this)">⚙️ Automation</button>
-      <button class="detail-cat-btn" onclick="filterDetails('ai', this)">🤖 AI</button>
-      <button class="detail-cat-btn" onclick="filterDetails('sales', this)">💼 Sales</button>
-      <button class="detail-cat-btn" onclick="filterDetails('staff', this)">🧑‍💼 Staff</button>
-      <button class="detail-cat-btn" onclick="filterDetails('odoo', this)">🔶 Odoo CRM</button>
-    </div>
-
-    <div class="detail-grid">
-
-      <!-- SEO -->
-      <div class="detail-card visible" data-cat="seo">
-        <div class="detail-card-header"><div class="detail-icon">🔍</div><div><div class="detail-card-title">SEO Starter</div><div class="detail-card-price">$299/mo · $2,990/yr</div></div></div>
-        <p>A monthly SEO management service covering the fundamentals — ensuring your website is technically sound, your pages are optimised for the right keywords, and your rankings are tracked every month.</p>
-        <ul class="detail-includes">
-          <li>Full technical SEO audit (monthly)</li>
-          <li>On-page optimisation for up to 10 pages/mo</li>
-          <li>Keyword rank tracking — up to 20 keywords</li>
-          <li>Google Search Console monitoring</li>
-          <li>Monthly SEO performance report</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A Singapore law firm subscribed to SEO Starter. Within 3 months, "corporate lawyer Singapore" moved from page 4 to page 1, generating 3× more organic enquiry forms.</div>
-      </div>
-
-      <div class="detail-card visible" data-cat="seo">
-        <div class="detail-card-header"><div class="detail-icon">🔍</div><div><div class="detail-card-title">SEO Growth</div><div class="detail-card-price">$699/mo · $6,990/yr</div></div></div>
-        <p>Full-service SEO including content production, backlink building, and a comprehensive keyword strategy. Ideal for businesses that want to own their niche in search results within 6 months.</p>
-        <ul class="detail-includes">
-          <li>Everything in SEO Starter</li>
-          <li>50+ keyword strategy and gap analysis</li>
-          <li>4 SEO blog posts per month (800–1,500 words)</li>
-          <li>Backlink outreach — 5–8 quality links/mo</li>
-          <li>Competitor SEO benchmarking</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> An e-commerce brand selling eco products grew organic traffic by 280% in 6 months. Blog content ranked for long-tail keywords, driving 40% of new customer acquisitions.</div>
-      </div>
-
-      <!-- Social -->
-      <div class="detail-card visible" data-cat="social">
-        <div class="detail-card-header"><div class="detail-icon">📱</div><div><div class="detail-card-title">Social Media — 2 Platforms</div><div class="detail-card-price">$399/mo · $3,990/yr</div></div></div>
-        <p>Consistent, on-brand social presence across two platforms. Our team creates content, schedules posts, and engages with your community so you can focus on running your business.</p>
-        <ul class="detail-includes">
-          <li>8 posts per month across 2 platforms</li>
-          <li>Branded graphics for each post</li>
-          <li>Monthly content calendar for approval</li>
-          <li>Comment &amp; DM responses (business hours)</li>
-          <li>Monthly engagement report</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A F&amp;B brand on Instagram and Facebook — we post 8 times/mo with food photography captions, stories, and reply to comments. Follower count grew 800→3,200 in 5 months.</div>
-      </div>
-
-      <div class="detail-card visible" data-cat="social">
-        <div class="detail-card-header"><div class="detail-icon">📱</div><div><div class="detail-card-title">Social Media — 4 Platforms</div><div class="detail-card-price">$699/mo · $6,990/yr</div></div></div>
-        <p>Full multi-platform social management across four channels — ideal for brands that want omnipresence across Instagram, Facebook, LinkedIn, TikTok, or X (Twitter).</p>
-        <ul class="detail-includes">
-          <li>16 posts per month across 4 platforms</li>
-          <li>Platform-native content formats (Reels, Shorts, Carousels)</li>
-          <li>Hashtag research and optimisation</li>
-          <li>Full community management</li>
-          <li>Competitor benchmarking report</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A SaaS startup runs LinkedIn for B2B leads, Instagram for brand awareness, TikTok for viral reach, and X for industry commentary — all managed by one dedicated social team.</div>
-      </div>
-
-      <!-- Ads -->
-      <div class="detail-card visible" data-cat="ads">
-        <div class="detail-card-header"><div class="detail-icon">📣</div><div><div class="detail-card-title">Google Ads Management</div><div class="detail-card-price">$499/mo · $4,990/yr</div></div></div>
-        <p>Expert management of your Google Search, Display, and Shopping campaigns. We handle everything from keyword bidding to ad copy to landing page recommendations — with weekly optimisation.</p>
-        <ul class="detail-includes">
-          <li>Campaign setup or audit &amp; restructure</li>
-          <li>Keyword research and negative keyword management</li>
-          <li>A/B ad copy testing (2 variants/campaign)</li>
-          <li>Weekly bid adjustments and budget pacing</li>
-          <li>Monthly performance report with ROAS tracking</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A HR software company was spending $4,000/mo on Google Ads with a 1.2× ROAS. After 60 days of management, ROAS improved to 4.8× — same budget, 4× more pipeline.</div>
-      </div>
-
-      <div class="detail-card visible" data-cat="ads">
-        <div class="detail-card-header"><div class="detail-icon">📣</div><div><div class="detail-card-title">Meta Ads Management</div><div class="detail-card-price">$499/mo · $4,990/yr</div></div></div>
-        <p>Facebook and Instagram ad campaigns managed end-to-end — from audience building and creative testing to retargeting and conversion optimisation.</p>
-        <ul class="detail-includes">
-          <li>Campaign strategy and funnel design (TOF/MOF/BOF)</li>
-          <li>Custom audience &amp; lookalike setup</li>
-          <li>Ad creative briefing (up to 4 creatives/mo)</li>
-          <li>Retargeting campaigns for website visitors</li>
-          <li>Weekly creative rotation and optimisation</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> An online education platform ran cold traffic ads to a free webinar, retargeted attendees with course ads, and achieved a $12 cost-per-sale — from a $3,000/mo ad budget.</div>
-      </div>
-
-      <div class="detail-card visible" data-cat="ads">
-        <div class="detail-card-header"><div class="detail-icon">📣</div><div><div class="detail-card-title">LinkedIn Ads Management</div><div class="detail-card-price">$599/mo · $5,990/yr</div></div></div>
-        <p>B2B lead generation via LinkedIn's powerful targeting — job title, industry, seniority, company size. Ideal for professional services, SaaS, and enterprise sales.</p>
-        <ul class="detail-includes">
-          <li>Sponsored Content and InMail campaigns</li>
-          <li>Audience targeting by title, industry, company size</li>
-          <li>Lead Gen Form setup and optimisation</li>
-          <li>CRM integration for lead delivery</li>
-          <li>Monthly CPL and pipeline report</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A B2B logistics software company targeted "Head of Operations" and "Supply Chain Director" in SEA. Generated 38 qualified leads in 30 days at $42 CPL — well below industry average of $120+.</div>
-      </div>
-
-      <!-- Email -->
-      <div class="detail-card visible" data-cat="email">
-        <div class="detail-card-header"><div class="detail-icon">📧</div><div><div class="detail-card-title">Email Marketing — Starter</div><div class="detail-card-price">$299/mo · $2,990/yr</div></div></div>
-        <p>Monthly email campaigns designed and sent to your list. We write, design, and deliver up to 4 campaigns per month — newsletters, promotions, or product updates.</p>
-        <ul class="detail-includes">
-          <li>Up to 5,000 contacts managed</li>
-          <li>4 email campaigns per month</li>
-          <li>Responsive email template design</li>
-          <li>Subject line A/B testing</li>
-          <li>Open rate, click rate, and unsubscribe reporting</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A skincare brand sends a weekly email to 2,800 subscribers — product features, tips, and promotions. Average open rate 42% (vs 21% industry average), generating $8,000/mo in direct email revenue.</div>
-      </div>
-
-      <div class="detail-card visible" data-cat="email">
-        <div class="detail-card-header"><div class="detail-icon">📧</div><div><div class="detail-card-title">Email Marketing — Pro</div><div class="detail-card-price">$599/mo · $5,990/yr</div></div></div>
-        <p>High-volume, segmented email marketing for businesses with larger lists and more complex communication needs — including drip sequences and behavioural triggers.</p>
-        <ul class="detail-includes">
-          <li>Up to 25,000 contacts with full segmentation</li>
-          <li>8 campaigns per month</li>
-          <li>Behavioural trigger emails (cart abandon, browse)</li>
-          <li>List health management and re-engagement</li>
-          <li>Revenue attribution reporting</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A B2B SaaS with 12,000 subscribers sends onboarding sequences, feature announcements, and win-back campaigns — segmented by plan tier and usage. Churn reduced by 18% in 4 months.</div>
-      </div>
-
-      <!-- Content -->
-      <div class="detail-card visible" data-cat="content">
-        <div class="detail-card-header"><div class="detail-icon">✍️</div><div><div class="detail-card-title">Content Writing — Starter</div><div class="detail-card-price">$299/mo · $2,990/yr</div></div></div>
-        <p>Four SEO-optimised blog posts per month, written by specialist copywriters using your brand voice and keyword strategy. Designed to rank and convert.</p>
-        <ul class="detail-includes">
-          <li>4 blog posts/mo (800–1,200 words each)</li>
-          <li>Keyword-led topic selection</li>
-          <li>SEO meta title and description included</li>
-          <li>Internal linking recommendations</li>
-          <li>One revision round per article</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A property management company publishes 4 articles/mo on topics like "how to calculate rental yield in Singapore." Within 4 months, organic search became their #1 lead source — ahead of paid ads.</div>
-      </div>
-
-      <div class="detail-card visible" data-cat="content">
-        <div class="detail-card-header"><div class="detail-icon">✍️</div><div><div class="detail-card-title">Graphic Design</div><div class="detail-card-price">$349/mo · $3,490/yr</div></div></div>
-        <p>A monthly bank of 10 on-brand design assets — social media graphics, ad banners, email headers, infographics, or presentation slides. All delivered in web-ready formats.</p>
-        <ul class="detail-includes">
-          <li>10 branded assets per month</li>
-          <li>Formats: social, banner, email, print-ready</li>
-          <li>Brand guidelines adherence</li>
-          <li>Source files provided (Figma or Adobe)</li>
-          <li>2 revision rounds per asset</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A fintech startup gets 10 social graphics/mo — 4 Instagram carousels, 3 LinkedIn banners, 2 Google Display ads, and 1 email header — all matching their design system.</div>
-      </div>
-
-      <div class="detail-card visible" data-cat="content">
-        <div class="detail-card-header"><div class="detail-icon">🎬</div><div><div class="detail-card-title">Short-Form Video Production</div><div class="detail-card-price">$599/mo · $5,990/yr</div></div></div>
-        <p>Four short-form videos per month — Reels, TikToks, or YouTube Shorts. Scripted, edited, captioned, and ready to post. Supply your footage or we direct the shoot remotely.</p>
-        <ul class="detail-includes">
-          <li>4 videos per month (15–90 seconds)</li>
-          <li>Script and storyboard provided</li>
-          <li>Professional editing, captions, music</li>
-          <li>Optimised for each platform's algorithm</li>
-          <li>Thumbnail design included</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A fitness studio sends us raw iPhone footage. We edit 4 Reels/mo with trending audio, captions, and a CTA. One video reached 140,000 views organically — generating 60 new trial sign-ups.</div>
-      </div>
-
-      <!-- Automation -->
-      <div class="detail-card visible" data-cat="automation">
-        <div class="detail-card-header"><div class="detail-icon">⚙️</div><div><div class="detail-card-title">Marketing Automation — Starter</div><div class="detail-card-price">$499/mo · $4,990/yr</div></div></div>
-        <p>Set up and manage automated marketing workflows so your leads are nurtured around the clock — without manual effort. Covers welcome sequences, lead nurture, and CRM sync.</p>
-        <ul class="detail-includes">
-          <li>Welcome email sequence (5-step)</li>
-          <li>Lead nurture drip (7–14 day sequence)</li>
-          <li>Form-to-CRM automation</li>
-          <li>Abandoned enquiry follow-up</li>
-          <li>Monthly workflow performance review</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A coaching business set up a 7-email nurture sequence triggered when someone downloads their free guide. 34% of leads who entered the sequence booked a discovery call within 14 days — all automated.</div>
-      </div>
-
-      <div class="detail-card visible" data-cat="automation">
-        <div class="detail-card-header"><div class="detail-icon">⚙️</div><div><div class="detail-card-title">Marketing Automation — Pro</div><div class="detail-card-price">$899/mo · $8,990/yr</div></div></div>
-        <p>Advanced multi-channel automation with behavioural triggers, lead scoring, and A/B split testing. For businesses with complex buyer journeys and multiple touchpoints.</p>
-        <ul class="detail-includes">
-          <li>Everything in Starter</li>
-          <li>Behavioural triggers (page visits, email opens, clicks)</li>
-          <li>Lead scoring model (custom rules)</li>
-          <li>Multi-channel flows (email + SMS + WhatsApp)</li>
-          <li>A/B split testing across automations</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A B2B software company scores leads: +10 for visiting pricing page, +20 for downloading case study, +30 for attending webinar. Leads above 60 points trigger an automated sales alert with full context — rep calls within 5 minutes.</div>
-      </div>
-
-      <!-- AI -->
-      <div class="detail-card visible" data-cat="ai">
-        <div class="detail-card-header"><div class="detail-icon">🤖</div><div><div class="detail-card-title">AI Content Generation</div><div class="detail-card-price">$299/mo · $2,990/yr</div></div></div>
-        <p>We use AI tools (Claude, GPT-4, Gemini) combined with human editing to produce high volumes of quality content — blog posts, social captions, ad copy, and product descriptions — at a fraction of traditional cost.</p>
-        <ul class="detail-includes">
-          <li>20+ AI-assisted content pieces per month</li>
-          <li>Human editing and brand-voice alignment</li>
-          <li>Blog posts, captions, ad copy, product descriptions</li>
-          <li>Prompt engineering for your brand</li>
-          <li>Plagiarism and AI-detection review</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> An e-commerce store with 200 products needs unique descriptions. AI Content Generation produces 50 product descriptions + 8 social captions + 4 blog intros per month — in 3 days, not 3 weeks.</div>
-      </div>
-
-      <div class="detail-card visible" data-cat="ai">
-        <div class="detail-card-header"><div class="detail-icon">🤖</div><div><div class="detail-card-title">AI Ad Optimisation</div><div class="detail-card-price">$399/mo · $3,990/yr</div></div></div>
-        <p>Apply AI-powered tools to your existing ad campaigns — predictive bidding, audience expansion via lookalikes, and automated creative rotation — to squeeze more performance from every dollar spent.</p>
-        <ul class="detail-includes">
-          <li>AI bid management and budget allocation</li>
-          <li>Lookalike audience generation and testing</li>
-          <li>Predictive ROAS modelling</li>
-          <li>Automated underperforming ad pausing</li>
-          <li>AI-generated ad copy variants for testing</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A travel agency running Google and Meta ads deployed AI optimisation. The system reallocated budget to the top 20% of ad sets in real-time. CPL dropped 38% in the first 45 days.</div>
-      </div>
-
-      <div class="detail-card visible" data-cat="ai">
-        <div class="detail-card-header"><div class="detail-icon">🤖</div><div><div class="detail-card-title">AI Marketing Chatbot</div><div class="detail-card-price">$499/mo · $4,990/yr</div></div></div>
-        <p>Deploy an AI chatbot on your website that captures leads, answers FAQs, qualifies prospects, and books meetings — 24/7, with seamless handoff to a human sales rep when needed.</p>
-        <ul class="detail-includes">
-          <li>Custom-trained AI chatbot (your products, FAQs)</li>
-          <li>Lead capture and CRM sync</li>
-          <li>Meeting booking integration (Calendly/Odoo)</li>
-          <li>Live chat handoff triggers</li>
-          <li>Monthly conversation analytics</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A solar panel company installed the chatbot. It handles 80% of enquiries automatically — answers "How much does a solar system cost?", collects roof size and location, and books a site visit. Sales team only steps in for the final quote.</div>
-      </div>
-
-      <div class="detail-card visible" data-cat="ai">
-        <div class="detail-card-header"><div class="detail-icon">🤖</div><div><div class="detail-card-title">Full AI Marketing Suite</div><div class="detail-card-price">$999/mo · $9,990/yr</div></div></div>
-        <p>All three AI services bundled — content generation, ad optimisation, and chatbot — plus AI-powered brand sentiment monitoring and a monthly AI strategy session to keep you ahead of the curve.</p>
-        <ul class="detail-includes">
-          <li>AI Content Generation (20+ pieces/mo)</li>
-          <li>AI Ad Optimisation across all platforms</li>
-          <li>AI Marketing Chatbot (deployed + managed)</li>
-          <li>AI sentiment monitoring (brand mentions)</li>
-          <li>Monthly AI strategy session (1 hr)</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A mid-market insurance broker uses the full suite: chatbot qualifies leads on the website, AI writes personalised follow-up emails, and the sentiment monitor alerts on negative reviews within 10 minutes — allowing same-day responses.</div>
-      </div>
-
-      <!-- Sales Services -->
-      <div class="detail-card visible" data-cat="sales">
-        <div class="detail-card-header"><div class="detail-icon">💼</div><div><div class="detail-card-title">Sales Funnel Strategy &amp; Setup</div><div class="detail-card-price">$599/mo · $5,990/yr</div></div></div>
-        <p>Design and build a complete sales funnel — from first touch to closed deal. We map your buyer journey, define each stage, configure your CRM pipeline, and set the KPIs your team tracks.</p>
-        <ul class="detail-includes">
-          <li>Buyer journey mapping workshop</li>
-          <li>Funnel stage definition (Awareness → Decision)</li>
-          <li>CRM pipeline configuration</li>
-          <li>Lead qualification criteria (BANT/MEDDIC)</li>
-          <li>Monthly funnel performance review</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A B2B consulting firm had no formal sales process — deals were tracked in spreadsheets. We built a 6-stage Odoo CRM pipeline, defined win criteria for each stage, and set up weekly pipeline review dashboards. Deal close rate improved by 22% in 90 days.</div>
-      </div>
-
-      <div class="detail-card visible" data-cat="sales">
-        <div class="detail-card-header"><div class="detail-icon">💼</div><div><div class="detail-card-title">Sales Collateral Creation</div><div class="detail-card-price">$499/mo · $4,990/yr</div></div></div>
-        <p>Professional sales materials that help your team close deals faster — pitch decks, one-pagers, capability statements, and proposal templates, all on-brand and tailored to your buyer.</p>
-        <ul class="detail-includes">
-          <li>Up to 3 sales documents per month</li>
-          <li>Pitch decks (10–20 slides, designed)</li>
-          <li>One-pager capability statements</li>
-          <li>Proposal templates (editable)</li>
-          <li>Brand-consistent design and copy</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> An IT services company needed a pitch deck for enterprise prospects. We built a 14-slide deck covering the problem, solution, case studies, and pricing framework. Win rate on first-meeting demos improved from 15% to 31%.</div>
-      </div>
-
-      <div class="detail-card visible" data-cat="sales">
-        <div class="detail-card-header"><div class="detail-icon">💼</div><div><div class="detail-card-title">Sales Enablement Content</div><div class="detail-card-price">$399/mo · $3,990/yr</div></div></div>
-        <p>Arm your sales team with the content they need to handle objections, communicate value, and close — battle cards, case studies, competitor comparisons, and objection-handling guides.</p>
-        <ul class="detail-includes">
-          <li>2 case studies per month (written + designed)</li>
-          <li>Competitor comparison matrix</li>
-          <li>Objection-handling script/guide</li>
-          <li>Battle cards for top 3 competitors</li>
-          <li>Quarterly content audit and refresh</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A cybersecurity firm's reps kept losing to one dominant competitor. We built a battle card showing 12 head-to-head advantages with specific proof points. Reps reported winning 3 deals in the first month by addressing competitor objections directly.</div>
-      </div>
-
-      <!-- Staff Augmentation -->
-      <div class="detail-card visible" data-cat="staff">
-        <div class="detail-card-header"><div class="detail-icon">🧑‍💼</div><div><div class="detail-card-title">Junior Sales Rep (80 hrs/mo)</div><div class="detail-card-price">$1,499/mo · $14,990/yr</div></div></div>
-        <p>A trained Sales Development Representative (SDR) who works for your business on a part-time basis — handling prospecting, cold outreach, and lead qualification so your senior team can focus on closing.</p>
-        <ul class="detail-includes">
-          <li>80 hours/month dedicated to your business</li>
-          <li>Cold outreach (email, LinkedIn, phone)</li>
-          <li>Lead qualification using your criteria</li>
-          <li>CRM data entry and pipeline updates</li>
-          <li>Weekly activity and pipeline report</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A SaaS startup couldn't afford a full-time SDR. Our junior rep worked 80 hrs/mo, sending 400 personalised outreach emails and 200 LinkedIn messages. Generated 14 qualified discovery calls in the first month — at a fraction of a full-time hire cost.</div>
-      </div>
-
-      <div class="detail-card visible" data-cat="staff">
-        <div class="detail-card-header"><div class="detail-icon">🧑‍💼</div><div><div class="detail-card-title">Senior Sales Rep (80 hrs/mo)</div><div class="detail-card-price">$2,499/mo · $24,990/yr</div></div></div>
-        <p>An experienced Account Executive who handles the full sales cycle — demos, proposals, negotiations, and closing. Your product, our rep. Immediate capacity without recruitment overhead.</p>
-        <ul class="detail-includes">
-          <li>80 hours/month dedicated to your business</li>
-          <li>Product demos and discovery calls</li>
-          <li>Proposal writing and presentation</li>
-          <li>Negotiation and deal closing</li>
-          <li>CRM hygiene and weekly pipeline update</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A cloud services company needed a rep in the Philippines market immediately. Our senior rep onboarded in 5 days, ran 8 demos in week 1, and closed a $28,000 annual contract in week 3 — before a full-time hire would even have been interviewed.</div>
-      </div>
-
-      <div class="detail-card visible" data-cat="staff">
-        <div class="detail-card-header"><div class="detail-icon">🧑‍💼</div><div><div class="detail-card-title">Full-Time Dedicated Sales Rep</div><div class="detail-card-price">$3,999/mo · $39,990/yr</div></div></div>
-        <p>A dedicated, full-time sales representative working exclusively on your business — 160 hours/month. Full pipeline ownership from prospecting to close, with weekly reporting to your leadership team.</p>
-        <ul class="detail-includes">
-          <li>160 hours/month (full-time equivalent)</li>
-          <li>Complete pipeline ownership</li>
-          <li>Prospecting, qualification, demos, closing</li>
-          <li>Weekly revenue forecast report</li>
-          <li>Direct line manager access</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A Singapore-based ERP vendor needed market coverage in Vietnam without setting up a local entity. Our dedicated rep works from HCMC, speaks Vietnamese and English, and manages the full sales cycle — generating $180k in new pipeline in Q1.</div>
-      </div>
-
-      <div class="detail-card visible" data-cat="staff">
-        <div class="detail-card-header"><div class="detail-icon">🧑‍💼</div><div><div class="detail-card-title">Fractional Sales Manager</div><div class="detail-card-price">$2,999/mo · $29,990/yr</div></div></div>
-        <p>An experienced sales leader on a part-time basis — coaching your team, reviewing pipeline, setting targets, building forecasts, and providing the strategic direction your revenue function needs to scale.</p>
-        <ul class="detail-includes">
-          <li>Weekly pipeline review and coaching sessions</li>
-          <li>Monthly revenue forecast and board-ready report</li>
-          <li>Sales playbook development</li>
-          <li>CRM hygiene audits and process improvement</li>
-          <li>Hiring support and interview panel</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A 12-person startup had 3 junior sales reps and no sales leader. Our fractional sales manager joined for 3 months — built the playbook, trained the team, and set up a forecasting process. The team's quota attainment went from 52% to 91%.</div>
-      </div>
-
-      <!-- Odoo CRM -->
-      <div class="detail-card visible" data-cat="odoo">
-        <div class="detail-card-header"><div class="detail-icon">🔶</div><div><div class="detail-card-title">Odoo CRM Setup &amp; Lead Management</div><div class="detail-card-price">$799/mo · $7,990/yr</div></div></div>
-        <p>Full configuration and ongoing management of your Odoo CRM — from pipeline setup and lead source tracking to automated assignment rules and monthly admin. Your team gets a CRM that actually works the way they sell.</p>
-        <ul class="detail-includes">
-          <li>Odoo CRM pipeline configuration (custom stages)</li>
-          <li>Lead capture form integration (website, ads, email)</li>
-          <li>Lead scoring and automated assignment rules</li>
-          <li>Monthly CRM hygiene and data quality audit</li>
-          <li>Reporting dashboard setup and training</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A recruitment agency had leads coming in from LinkedIn, website, and referrals — all going into a shared inbox. We set up Odoo CRM with 3 lead sources, 5 pipeline stages, and auto-assignment by consultant. No lead fell through the cracks for the first time.</div>
-      </div>
-
-      <div class="detail-card visible" data-cat="odoo">
-        <div class="detail-card-header"><div class="detail-icon">📅</div><div><div class="detail-card-title">Online Booking &amp; Calendar Integration</div><div class="detail-card-price">$399/mo · $3,990/yr</div></div></div>
-        <p>Set up Odoo Appointments so prospects can book meetings directly from your website or a CRM follow-up email — eliminating back-and-forth scheduling and ensuring every lead gets a fast response.</p>
-        <ul class="detail-includes">
-          <li>Odoo Appointments module setup</li>
-          <li>Calendar sync (Google / Outlook)</li>
-          <li>Automated confirmation and reminder emails</li>
-          <li>Booking link in email signatures and CRM</li>
-          <li>Buffer times, availability rules, multi-rep support</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A legal tech firm added a "Book a Free Demo" button to their website and email nurture. Within a week, 23 prospects self-scheduled demos — without a single email exchange. Sales team's time-to-demo dropped from 3.2 days to 4 hours.</div>
-      </div>
-
-      <div class="detail-card visible" data-cat="odoo">
-        <div class="detail-card-header"><div class="detail-icon">📝</div><div><div class="detail-card-title">Quote, E-Sign &amp; Invoice Automation</div><div class="detail-card-price">$599/mo · $5,990/yr</div></div></div>
-        <p>End-to-end automation of your quote-to-cash process in Odoo — from professional quotation templates to e-signature workflows to automatic invoice creation on approval.</p>
-        <ul class="detail-includes">
-          <li>Odoo quotation template design (branded)</li>
-          <li>E-signature workflow setup (Odoo Sign)</li>
-          <li>Auto-invoice creation on quote approval</li>
-          <li>Payment reminder automation</li>
-          <li>Revenue recognition and reporting</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A managed IT services company was creating quotes in Word and chasing signatures via email. We automated the full flow: Odoo generates the quote → client receives branded PDF → clicks to sign electronically → invoice is created automatically → overdue reminders go out at day 7 and 14.</div>
-      </div>
-
-      <div class="detail-card visible" data-cat="odoo">
-        <div class="detail-card-header"><div class="detail-icon">🔶</div><div><div class="detail-card-title">Full Sales Pipeline Suite</div><div class="detail-card-price">$1,499/mo · $14,990/yr</div></div></div>
-        <p>The complete Odoo-powered sales pipeline — every step from first lead to paid invoice, all connected and automated. The most comprehensive sales operations subscription we offer.</p>
-        <ul class="detail-includes">
-          <li><strong>Leads:</strong> Web forms, ads, and email → Odoo CRM automatically</li>
-          <li><strong>CRM:</strong> Scored, assigned, and tracked through custom pipeline stages</li>
-          <li><strong>Booking:</strong> Self-service calendar for demos and discovery calls</li>
-          <li><strong>Presentation:</strong> AI chatbot pre-qualifies, sends deck automatically</li>
-          <li><strong>Quote:</strong> Branded quotation sent from Odoo in one click</li>
-          <li><strong>Live Chat:</strong> Real-time chat on website with CRM sync</li>
-          <li><strong>E-Sign:</strong> Client signs electronically, triggers next steps</li>
-          <li><strong>Invoice:</strong> Auto-generated on approval, payment reminders automated</li>
-        </ul>
-        <div class="detail-example"><strong>Example:</strong> A Singapore staffing firm had a 14-day average sales cycle with heavy manual admin. After deploying the Full Pipeline Suite, leads self-book, quotes are sent in minutes, and contracts are e-signed same day. Average deal cycle dropped to 4 days. Monthly revenue grew 34% in 90 days — same team, less friction.</div>
-      </div>
-
-    </div><!-- /detail-grid -->
-  </div><!-- /section-wrap -->
 </section>
 
 <!-- FAQ -->
 <section class="faq" id="faq">
-  <div class="section-wrap" style="text-align:center;">
-    <div class="section-label">FAQ</div>
-    <h2>Common questions</h2>
-  </div>
-  <div class="faq-list">
-    <div class="faq-item open">
-      <div class="faq-q" onclick="toggleFaq(this)"><span>How do subscriptions work?</span><span class="faq-icon">+</span></div>
-      <div class="faq-a">Once you subscribe via the portal, your card is charged immediately and your service activates within 24 hours. Monthly plans renew automatically each month; yearly plans renew once per year. You can manage or cancel at any time from your portal dashboard.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)"><span>Can I cancel at any time?</span><span class="faq-icon">+</span></div>
-      <div class="faq-a">Yes. Monthly plans can be cancelled before the next billing date with no penalty. Yearly plans are non-refundable but you keep access for the remaining period. No cancellation fees or lock-in contracts.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)"><span>Can I mix packages and à la carte services?</span><span class="faq-icon">+</span></div>
-      <div class="faq-a">Absolutely. Start with a bundle and add individual services on top using the Build Your Plan calculator. Each subscription is billed as a separate line item — full flexibility to mix and match.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)"><span>How does Sales Staff Augmentation work?</span><span class="faq-icon">+</span></div>
-      <div class="faq-a">We assign a trained sales rep to your business. They use your tools (or we set them up), work under your brand, follow your sales process, and report directly to you weekly. Onboarding takes 3–5 business days. No employment contracts, no HR overheads.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)"><span>Do I need an existing Odoo instance for the CRM services?</span><span class="faq-icon">+</span></div>
-      <div class="faq-a">No. We can set up a fresh Odoo instance as part of onboarding, or work within your existing deployment. If you need a full Odoo ERP implementation (not just CRM), speak to our partner team at TechNext — an official Odoo Ready Partner.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)"><span>What payment methods are accepted?</span><span class="faq-icon">+</span></div>
-      <div class="faq-a">All major credit and debit cards (Visa, Mastercard, American Express) through our secure portal. Corporate cards welcome. All transactions are in USD and secured by industry-standard encryption.</div>
+  <div class="faq-inner">
+    <div class="section-eyebrow">FAQ</div>
+    <h2 class="section-title">Questions, answered</h2>
+    <div style="margin-top:40px;">
+      <div class="faq-item open"><div class="faq-q" onclick="toggleFaq(this)"><span>How do subscriptions work?</span><span class="faq-icon">+</span></div><div class="faq-a">Subscribe via the portal with a credit card. Your service activates within 24 hours. Monthly plans renew each month, yearly plans renew once a year. Manage or cancel any time from your dashboard.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>Can I cancel at any time?</span><span class="faq-icon">+</span></div><div class="faq-a">Yes. Monthly plans cancel before the next billing date, no penalty. Yearly plans stop future renewals — you keep access for the remaining period. No cancellation fees, no lock-in.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>How does Sales Staff Augmentation work?</span><span class="faq-icon">+</span></div><div class="faq-a">We assign a trained sales rep who works under your brand, uses your tools, and follows your process — reporting to you weekly. Onboarding takes 3–5 business days. No employment contracts, no HR overhead.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>Do I need existing Odoo to use the CRM services?</span><span class="faq-icon">+</span></div><div class="faq-a">No. We set up a fresh Odoo instance as part of onboarding, or work within your existing deployment. For full Odoo ERP (not just CRM), ask our partner team — an official Odoo Ready Partner.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What payment methods are accepted?</span><span class="faq-icon">+</span></div><div class="faq-a">All major credit and debit cards (Visa, Mastercard, Amex) via our secure portal. Corporate cards welcome. All transactions in USD, industry-standard encryption.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>Can I mix bundles with à la carte services?</span><span class="faq-icon">+</span></div><div class="faq-a">Absolutely. Start with a bundle and add individual services on top. Each subscription is a separate line item — full flexibility.</div></div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
 <section class="cta-banner">
-  <div class="section-label" style="background:rgba(255,255,255,.15);color:var(--white);border:1px solid rgba(255,255,255,.3);">Start Today</div>
-  <h2>Ready to grow your business?</h2>
-  <p>Subscribe to a plan and have your marketing team active within 24 hours.</p>
-  <div class="hero-actions">
-    <a href="#packages" class="btn-primary">View All Plans</a>
-    <a href="mailto:hello@nextmarketing.io" class="btn-outline">Talk to Sales</a>
+  <div class="cta-inner">
+    <h2>Ready to grow your business?</h2>
+    <p>Subscribe today and have your marketing team active within 24 hours.</p>
+    <div class="hero-cta-row">
+      <a href="#builder" class="btn btn-solid">Build Your Plan</a>
+      <a href="mailto:hello@nextmarketing.io" class="btn btn-ghost">Talk to Sales</a>
+    </div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <div>
-    <div class="footer-logo">NextMarketing</div>
-    <p style="margin-top:4px;">Smart Marketing. Predictable Growth.</p>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">NextMarketing</div>
+      <p class="footer-tag">Smart Marketing. Predictable Growth. Enterprise-grade services delivered as monthly subscriptions.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#builder">Build Plan</a></li>
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#testimonials">Case Studies</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:hello@nextmarketing.io">hello@nextmarketing.io</a></li>
+      </ul>
+    </div>
   </div>
-  <p>© 2026 NextMarketing. All rights reserved. · <a href="mailto:hello@nextmarketing.io">hello@nextmarketing.io</a></p>
+  <div class="footer-bottom">
+    <div>© 2026 NextMarketing. All rights reserved.</div>
+    <div>Smart Marketing. Predictable Growth.</div>
+  </div>
 </footer>
 
 <script>
-  /* ── PACKAGE TOGGLE ── */
-  let isYearly = true;
-  const pkgs = {
-    starter: { mo:'$799',   yr:'$7,990',  subMo:'Billed $9,588/year',   subYr:'Save $1,598 vs monthly' },
-    growth:  { mo:'$1,799', yr:'$17,990', subMo:'Billed $21,588/year',  subYr:'Save $3,598 vs monthly' },
-    scale:   { mo:'$2,999', yr:'$29,990', subMo:'Billed $35,988/year',  subYr:'Save $5,998 vs monthly' },
-  };
-  function toggleBilling() {
-    isYearly = !isYearly;
-    document.getElementById('billingToggle').className = 'toggle-switch '+(isYearly?'yearly':'monthly');
-    document.getElementById('lbl-monthly').classList.toggle('active',!isYearly);
-    document.getElementById('lbl-yearly').classList.toggle('active',isYearly);
-    for (const [k,p] of Object.entries(pkgs)) {
-      const el = document.getElementById('price-'+k);
-      const su = document.getElementById('subprice-'+k);
-      if(!el) continue;
-      el.childNodes[0].nodeValue = isYearly ? p.yr : p.mo;
-      el.querySelector('span').textContent = isYearly ? '/yr' : '/mo';
-      su.textContent = isYearly ? p.subYr : p.subMo;
-    }
-  }
-  toggleBilling(); toggleBilling(); // init to yearly
+  /* ── STATE ── */
+  let billing = 'mo'; // 'mo' | 'yr'
+  let activeGoal = null;
+  let activeCat = 'all';
+  let searchTerm = '';
+  const selected = new Set();
 
-  /* ── CALC TOGGLE ── */
-  let calcYearly = false;
-  function toggleCalc() {
-    calcYearly = !calcYearly;
-    document.getElementById('calcToggle').className = 'toggle-switch '+(calcYearly?'yearly':'monthly');
-    document.getElementById('calc-lbl-monthly').classList.toggle('active',!calcYearly);
-    document.getElementById('calc-lbl-yearly').classList.toggle('active',calcYearly);
-    document.getElementById('calc-th-price').textContent = calcYearly ? 'Yearly Price' : 'Monthly Price';
-    document.querySelectorAll('.svc-row').forEach(row => {
-      const mo = parseInt(row.dataset.monthly||0);
-      const yr = parseInt(row.dataset.yearly||0);
-      const priceEl = row.querySelector('.svc-price');
-      if(!priceEl) return;
-      if(calcYearly) priceEl.textContent = '$'+yr.toLocaleString()+'/yr';
-      else priceEl.textContent = '$'+mo.toLocaleString()+'/mo';
-    });
-    updateTotals();
+  /* ── GOAL ── */
+  function setGoal(btn, goal) {
+    document.querySelectorAll('.goal-card').forEach(b => b.classList.remove('active'));
+    if (activeGoal === goal) { activeGoal = null; }
+    else { btn.classList.add('active'); activeGoal = goal; }
+    filterServices();
+    if(activeGoal) document.getElementById('builder').scrollIntoView({behavior:'smooth'});
   }
 
-  /* ── ROW TOGGLE ── */
-  function toggleRow(row) {
-    const cb = row.querySelector('.svc-checkbox');
-    cb.checked = !cb.checked;
-    row.classList.toggle('checked', cb.checked);
-    updateTotals();
+  /* ── TAB ── */
+  function filterTab(btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeCat = btn.dataset.cat;
+    filterServices();
   }
 
-  /* ── TOTALS ── */
-  function updateTotals() {
-    let totalMo = 0, totalYr = 0, count = 0;
-    document.querySelectorAll('.svc-row').forEach(row => {
-      const cb = row.querySelector('.svc-checkbox');
-      if(!cb) return;
-      row.classList.toggle('checked', cb.checked);
-      if(cb.checked) {
-        totalMo += parseInt(row.dataset.monthly||0);
-        totalYr += parseInt(row.dataset.yearly||0);
-        count++;
+  /* ── SEARCH ── */
+  function filterServices() {
+    searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    let visible = 0;
+    document.querySelectorAll('.service-card').forEach(card => {
+      const cat = card.dataset.cat;
+      const goals = (card.dataset.goal||'').split(' ');
+      const name = (card.dataset.name||'').toLowerCase();
+      const desc = card.querySelector('.svc-desc').textContent.toLowerCase();
+
+      const catMatch = activeCat === 'all' || activeCat === cat;
+      const goalMatch = !activeGoal || goals.includes(activeGoal);
+      const searchMatch = !searchTerm || name.includes(searchTerm) || desc.includes(searchTerm);
+
+      if (catMatch && goalMatch && searchMatch) {
+        card.classList.remove('hidden'); visible++;
+      } else {
+        card.classList.add('hidden');
       }
     });
-    const bar = document.getElementById('summaryBar');
-    if(count === 0) { bar.classList.add('hidden'); return; }
-    bar.classList.remove('hidden');
-    document.getElementById('summaryCount').textContent = count + (count===1?' service':' services')+' selected';
-    document.getElementById('summaryMonthly').textContent = '$'+totalMo.toLocaleString()+'/mo';
-    document.getElementById('summaryYearly').textContent = '$'+totalYr.toLocaleString()+'/yr';
+    document.getElementById('visibleCount').textContent = visible;
+  }
+
+  /* ── TOGGLE SERVICE ── */
+  function toggleSvc(card) {
+    const name = card.dataset.name;
+    if (selected.has(name)) { selected.delete(name); card.classList.remove('selected'); }
+    else { selected.add(name); card.classList.add('selected'); }
+    card.querySelector('.svc-add').textContent = selected.has(name) ? 'Added' : 'Add';
+    updateCart();
+  }
+  // Click handler on individual Add buttons
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.service-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if(e.target.closest('.svc-add') || e.currentTarget === card) {
+          e.stopPropagation();
+          toggleSvc(card);
+        }
+      }, { once:false });
+    });
+  });
+
+  /* ── BILLING TOGGLE ── */
+  function setBilling(mode) {
+    billing = mode;
+    document.getElementById('toggleMo').classList.toggle('active', mode==='mo');
+    document.getElementById('toggleYr').classList.toggle('active', mode==='yr');
+    // update all service card prices
+    document.querySelectorAll('.service-card').forEach(card => {
+      const priceEl = card.querySelector('.svc-price');
+      const mo = parseInt(card.dataset.mo);
+      const yr = parseInt(card.dataset.yr);
+      priceEl.innerHTML = mode==='mo' ? '$'+mo.toLocaleString()+'<span>/mo</span>' : '$'+yr.toLocaleString()+'<span>/yr</span>';
+    });
+    updateCart();
+  }
+
+  /* ── CART ── */
+  function updateCart() {
+    const items = document.getElementById('cartItems');
+    const empty = document.getElementById('cartEmpty');
+    const rec = document.getElementById('cartRec');
+    items.innerHTML = '';
+    let totalMo = 0, totalYr = 0;
+
+    if (selected.size === 0) {
+      items.appendChild(empty);
+      empty.style.display = 'block';
+    } else {
+      empty.style.display = 'none';
+    }
+
+    document.querySelectorAll('.service-card.selected').forEach(card => {
+      const name = card.dataset.name;
+      const mo = parseInt(card.dataset.mo);
+      const yr = parseInt(card.dataset.yr);
+      totalMo += mo; totalYr += yr;
+      const item = document.createElement('div');
+      item.className = 'cart-item';
+      const priceText = billing==='mo' ? '$'+mo.toLocaleString()+'/mo' : '$'+yr.toLocaleString()+'/yr';
+      item.innerHTML = `<div class="cart-item-info"><div class="cart-item-name">${name}</div><div class="cart-item-price">${priceText}</div></div><button class="cart-remove" onclick="removeItem('${name.replace(/'/g,"\\'")}')">×</button>`;
+      items.appendChild(item);
+    });
+
+    const count = selected.size;
+    document.getElementById('cartCount').textContent = count;
+    document.getElementById('cartMobileCount').textContent = count;
+
+    const total = billing==='mo' ? totalMo : totalYr;
+    document.getElementById('cartTotal').textContent = '$'+total.toLocaleString();
+    document.getElementById('cartPeriod').textContent = billing==='mo' ? '/mo' : '/yr';
+    document.getElementById('cartMobileTotal').textContent = '$'+total.toLocaleString() + (billing==='mo'?'/mo':'/yr');
+
     const saved = (totalMo*12) - totalYr;
-    document.getElementById('summarySavings').textContent = 'Save $'+saved.toLocaleString()+'/yr';
+    document.getElementById('cartSavings').textContent = (billing==='yr' && saved>0) ? `Saving $${saved.toLocaleString()} vs monthly` : '';
+
+    // Recommendation
+    if (count >= 3) {
+      const recText = count >= 6
+        ? '<strong>💡 Tip</strong> You have '+count+' services selected — check the <b>Enterprise</b> package. It usually costs less than this combination with extras included.'
+        : '<strong>💡 Tip</strong> With '+count+' services, you might save more with our <b>Growth</b> package. Scroll down to compare.';
+      rec.innerHTML = recText;
+      rec.classList.add('visible');
+    } else {
+      rec.classList.remove('visible');
+    }
+  }
+
+  function removeItem(name) {
+    selected.delete(name);
+    document.querySelectorAll('.service-card').forEach(c => {
+      if (c.dataset.name === name) { c.classList.remove('selected'); c.querySelector('.svc-add').textContent = 'Add'; }
+    });
+    updateCart();
   }
 
   function clearAll() {
-    document.querySelectorAll('.svc-checkbox').forEach(cb => { cb.checked = false; });
-    document.querySelectorAll('.svc-row').forEach(r => r.classList.remove('checked'));
-    updateTotals();
+    selected.clear();
+    document.querySelectorAll('.service-card.selected').forEach(c => { c.classList.remove('selected'); c.querySelector('.svc-add').textContent='Add'; });
+    updateCart();
   }
 
-  /* ── DETAIL FILTER ── */
-  function filterDetails(cat, btn) {
-    document.querySelectorAll('.detail-cat-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.detail-card').forEach(card => {
-      if(cat === 'all' || card.dataset.cat === cat) card.classList.add('visible');
-      else card.classList.remove('visible');
+  function checkout() {
+    if (selected.size === 0) { alert('Please select at least one service first.'); return; }
+    const items = Array.from(selected).join('%0A- ');
+    const totalEl = document.getElementById('cartTotal').textContent;
+    const period = document.getElementById('cartPeriod').textContent;
+    const body = `Hi NextMarketing,%0A%0AI'd like a quote for these services:%0A%0A- ${items}%0A%0ATotal: ${totalEl}${period}%0A%0AThanks!`;
+    window.location.href = `mailto:hello@nextmarketing.io?subject=NextMarketing Plan Quote&body=${body}`;
+  }
+
+  function toggleCart() { document.getElementById('cart').classList.toggle('open'); }
+
+  /* ── PACKAGE TOGGLE ── */
+  const pkg = {
+    s:{mo:'$799',  yr:'$7,990',  subMo:'Billed monthly · Cancel anytime', subYr:'Save $1,598/yr vs monthly'},
+    g:{mo:'$1,799',yr:'$17,990', subMo:'Billed monthly · Cancel anytime', subYr:'Save $3,598/yr vs monthly'},
+    x:{mo:'$2,999',yr:'$29,990', subMo:'Billed monthly · Cancel anytime', subYr:'Save $5,998/yr vs monthly'},
+  };
+  function togglePkg(mode) {
+    document.getElementById('pkgMoBtn').classList.toggle('active', mode==='mo');
+    document.getElementById('pkgYrBtn').classList.toggle('active', mode==='yr');
+    for (const [k,p] of Object.entries(pkg)) {
+      const pe = document.getElementById('pkgPrice-'+k);
+      const se = document.getElementById('pkgSub-'+k);
+      pe.innerHTML = (mode==='mo' ? p.mo+'<span>/mo</span>' : p.yr+'<span>/yr</span>');
+      se.textContent = mode==='mo' ? p.subMo : p.subYr;
+    }
+  }
+
+  /* ── APPLY PACKAGE ── */
+  function applyPackage(which) {
+    const bundles = {
+      starter: ['SEO Starter','Social Media — 2 Platforms','Monthly Analytics Report'],
+      growth:  ['SEO Growth','Social Media — 4 Platforms','Google Ads Management','Email Marketing — Starter','Monthly Analytics Report'],
+      scale:   ['SEO Growth','Social Media — 4 Platforms','Google Ads Management','Meta Ads Management','Email Marketing — Starter','Content Writing — Pro','Graphic Design','Short-Form Video','Marketing Automation — Pro'],
+    };
+    const names = bundles[which];
+    if (!names) return;
+    clearAll();
+    names.forEach(n => {
+      document.querySelectorAll('.service-card').forEach(c => {
+        if (c.dataset.name === n) { selected.add(n); c.classList.add('selected'); c.querySelector('.svc-add').textContent='Added'; }
+      });
     });
+    updateCart();
+    document.getElementById('builder').scrollIntoView({behavior:'smooth'});
   }
 
   /* ── FAQ ── */
@@ -1189,8 +1038,11 @@
     const item = el.closest('.faq-item');
     const wasOpen = item.classList.contains('open');
     document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-    if(!wasOpen) item.classList.add('open');
+    if (!wasOpen) item.classList.add('open');
   }
+
+  /* ── INIT ── */
+  updateCart();
 </script>
 </body>
 </html>
